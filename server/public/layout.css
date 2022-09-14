@@ -1,0 +1,15 @@
+.row {
+  display: flex;
+}
+
+.column-full {
+  flex-basis: 100%;
+}
+
+.column-one-third {
+  flex-basis: calc(100%/3);
+}
+
+.column-flex {
+  flex-basis: flex;
+}
