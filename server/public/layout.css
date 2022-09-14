@@ -1,9 +1,17 @@
+.hidden {
+  display: none !important;
+}
+
 .row {
   display: flex;
 }
 
 .column-full {
   flex-basis: 100%;
+}
+
+.column-one-half {
+  flex-basis: 50%;
 }
 
 .column-one-third {

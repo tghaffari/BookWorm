@@ -22,7 +22,11 @@
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
 }
 
-.navbar-mobile {
+.desktop-nav-view {
+  display: none;
+}
+
+.navbar {
   background-color: #f67070;
   height: 50px;
   padding: 0 25px;
@@ -44,8 +48,59 @@
   font-size: 20px;
 }
 
+.nav-text {
+  display: block;
+  color: #f8f8ee;
+  font-size: 20px;
+  margin: 0;
+}
+
+.nav-items-padding {
+  padding-left: 25px;
+}
+
 .sign-out-icon,
 .home-icon {
   color: #f8f8ee;
   font-size: 24px;
+}
+
+.search-icon:hover,
+.sign-out-icon:hover,
+.home-icon:hover,
+.nav-item:hover {
+  cursor: pointer;
+}
+
+.search-icon:hover,
+.sign-out-icon:hover,
+.home-icon:hover { /* this psuedo-class isn't working on text in desktop view */
+  color: #783b03;
+  transition: 1s;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-nav-view {
+    display: none;
+  }
+
+  .desktop-nav-view {
+    display: contents;
+  }
+
+  .navbar {
+    height: 65px;
+    padding: 0 45px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .home-icon,
+  .search-icon,
+  .sign-out-icon {
+    font-size: 24px;
+    height: 27.5px;
+  }
 }
