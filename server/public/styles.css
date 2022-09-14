@@ -10,6 +10,10 @@
   align-items: center;
 }
 
+.align-items-end {
+  align-items: flex-end;
+}
+
 .text-align-end {
   text-align: end;
 }
@@ -65,18 +69,60 @@
   font-size: 24px;
 }
 
+.mobile-search-bar {
+  width: 250px;
+  height: 25px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: solid #ced4da;
+}
+
+.cancel-search {
+  display: inline;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  color: #f8f8ee;
+}
+
+.cancel-search-desktop {
+  display: inline;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  color: #f8f8ee;
+  margin-left: 5px;
+}
+
+.desktop-search-bar {
+  width: 170px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: solid #ced4da;
+  margin-bottom: 10px;
+}
+
 .search-icon:hover,
 .sign-out-icon:hover,
 .home-icon:hover,
-.nav-item:hover {
+.nav-item:hover,
+.cancel-search:hover,
+.cancel-search-desktop:hover {
   cursor: pointer;
 }
 
 .search-icon:hover,
 .sign-out-icon:hover,
-.home-icon:hover { /* this psuedo-class isn't working on text in desktop view */
+.home-icon:hover,
+.cancel-search:hover,
+.cancel-search-desktop:hover { /* this psuedo-class isn't working on text in desktop view */
   color: #783b03;
   transition: 1s;
+}
+
+.mobile-search-bar:focus,
+.desktop-search-bar:focus {
+  outline: none;
+  border-color: #783b03;
 }
 
 @media screen and (min-width: 768px) {
@@ -101,6 +147,13 @@
   .search-icon,
   .sign-out-icon {
     font-size: 24px;
-    height: 27.5px;
+  }
+
+  .desktop-search-bar {
+    margin-right: 0;
+  }
+
+  .cancel-search {
+    font-size: 10px;
   }
 }
