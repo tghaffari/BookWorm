@@ -21,28 +21,14 @@ export default class SearchResults extends React.Component {
 
   formatSearchResults() {
     const paramString = this.props.params.toString();
-    const query = paramString.slice(2)
-      .replaceAll('+', ' ')
-      .replaceAll('%27', '\'')
-      .replaceAll('%21', '!')
-      .replaceAll('%2C', ',')
-      .replaceAll('%25', '%')
-      .replaceAll('%40', '@')
-      .replaceAll('%23', '#')
-      .replaceAll('%24', '$')
-      .replaceAll('%28', '(')
-      .replaceAll('%29', ')')
-      .replaceAll('%3D', '=');
+    const query = decodeURIComponent(paramString.slice(2)).replaceAll('+', ' ');
     return query;
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const query = this.state.searchValue.replaceAll(' ', '+');
-    const url = new URL(window.location);
-    url.hash = ('search?q=' + query);
-    window.location.replace(url);
-
+    window.location.hash = (`search?q='${query}`);
     return null;
   }
 
@@ -55,40 +41,12 @@ export default class SearchResults extends React.Component {
             isLoading: false,
             results: 'Sorry, no results were found. Please try again...'
           });
+        } else {
+          this.setState({
+            isLoading: false,
+            results: data.items
+          });
         }
-        const searchResults = data.items.map((results, index) => {
-          let author = '';
-          if (results.volumeInfo.authors !== undefined) {
-            author = results.volumeInfo.authors.join(', ');
-          }
-          let publishedYear = '';
-          if (results.volumeInfo.publishedDate !== undefined) {
-            publishedYear = results.volumeInfo.publishedDate.slice(0, 4);
-          }
-          return (
-            <li key={index} className="search-list-element">
-              <div className="column-full ">
-                <div className='row search-results-padding'>
-                  <div className='column-flex'>
-                    <img className='search-image' src={results.volumeInfo.imageLinks.thumbnail}></img>
-                  </div>
-                  <div className='column-flex book-details-container'>
-                    <h3 className='search-book-title'>{results.volumeInfo.title}</h3>
-                    <p className='search-author'>{author}</p>
-                    <p className='search-date'>{publishedYear}</p>
-                    <p className='search-synopsis'>{results.volumeInfo.description}</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-          );
-        }
-        );
-
-        this.setState({
-          isLoading: false,
-          results: searchResults
-        });
       })
       .catch(err => console.error(err));
   }
@@ -111,6 +69,39 @@ export default class SearchResults extends React.Component {
   render() {
     if (this.state.isLoading) return null;
 
+    const searchResults = this.state.results.map((results, index) => {
+      let author = '';
+      if (results.volumeInfo.authors !== undefined) {
+        author = results.volumeInfo.authors.join(', ');
+      }
+      let publishedYear = '';
+      if (results.volumeInfo.publishedDate !== undefined) {
+        publishedYear = results.volumeInfo.publishedDate.slice(0, 4);
+      }
+
+      let src = 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg';
+      if (results.volumeInfo.imageLinks !== undefined) {
+        src = results.volumeInfo.imageLinks.thumbnail;
+      }
+      return (
+        <li key={index} className="search-list-element">
+          <div className="column-full ">
+            <div className='row search-results-padding'>
+              <div className='column-flex'>
+                <img className='search-image' src={src}></img>
+              </div>
+              <div className='column-flex book-details-container'>
+                <h3 className='search-book-title'>{results.volumeInfo.title}</h3>
+                <p className='search-author'>{author}</p>
+                <p className='search-date'>{publishedYear}</p>
+                <p className='search-synopsis'>{results.volumeInfo.description}</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      );
+    });
+
     return (
       <>
         <h1 className='search-heading'>Search</h1>
@@ -124,7 +115,7 @@ export default class SearchResults extends React.Component {
           </input>
         </form>
         <ul className="search-results-ul">
-          {this.state.results}
+          {searchResults}
         </ul>
       </>
     );

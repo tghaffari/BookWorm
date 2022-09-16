@@ -31,9 +31,7 @@ export default class Navbar extends React.Component {
   handleSearchSubmit(event) {
     event.preventDefault();
     const query = this.state.searchValue.replaceAll(' ', '+');
-    const url = new URL(window.location);
-    url.hash = ('search?q=' + query);
-    window.location.replace(url);
+    window.location.hash = (`search?q=${query}`);
     this.setState({
       search: false,
       searchValue: ''
