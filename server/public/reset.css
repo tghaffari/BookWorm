@@ -5,3 +5,24 @@
 body {
   margin: 0;
 }
+
+h1 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navigation-list {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+}
+
+.search-results-ul {
+  list-style: none;
+  padding: 0;
+}

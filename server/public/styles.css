@@ -1,0 +1,218 @@
+.background-color {
+  background-color: #f2e7e2;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-end {
+  align-items: flex-end;
+}
+
+.text-align-end {
+  text-align: end;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.box-shadow {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+}
+
+.desktop-nav-view {
+  display: none;
+}
+
+.navbar {
+  background-color: #f67070;
+  height: 50px;
+  padding: 0 25px;
+}
+
+.bottom-shadow {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25), inset 0 2px 10px 0 rgba(0, 0, 0, 0.25);
+}
+
+.title {
+  font-family: Dosis, sans-serif;
+  color: #f8f8ee;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.search-icon {
+  color: #f8f8ee;
+  font-size: 20px;
+}
+
+.nav-text {
+  display: block;
+  color: #f8f8ee;
+  font-size: 20px;
+  margin: 0;
+}
+
+.nav-items-padding {
+  padding-left: 25px;
+}
+
+.home-icon {
+  color: #f8f8ee;
+  font-size: 24px;
+}
+
+.mobile-search-bar {
+  width: 250px;
+  height: 25px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: solid #ced4da;
+}
+
+.cancel-search {
+  display: inline;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  color: #f8f8ee;
+}
+
+.cancel-search-desktop {
+  display: inline;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  color: #f8f8ee;
+  margin-left: 5px;
+}
+
+.desktop-search-bar {
+  width: 170px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: solid #ced4da;
+  margin-bottom: 10px;
+}
+
+.search-heading {
+  color: #783b03;
+  font-family: Inter, sans-serif;
+  padding-top: 10px;
+}
+
+.search-bar {
+  width: 100%;
+  margin-top: 5px;
+  height: 30px;
+  border-radius: 4px;
+  border: solid #ced4da;
+  font-family: Inter, sans-serif;
+}
+
+.search-results-padding {
+  padding: 20px 0;
+}
+
+.search-book-title {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  padding-bottom: 2px;
+}
+
+.book-details-container {
+  margin-left: 10px;
+}
+
+.search-author,
+.search-date,
+.search-synopsis {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 2px 0;
+}
+
+.search-image {
+  max-width: 128px;
+}
+
+.search-synopsis {
+  padding-top: 10px;
+}
+
+.search-icon:hover,
+.home-icon:hover,
+.nav-item:hover,
+.cancel-search:hover,
+.cancel-search-desktop:hover,
+.nav-text {
+  cursor: pointer;
+}
+
+.search-icon:hover,
+.home-icon:hover,
+.cancel-search:hover,
+.cancel-search-desktop:hover {
+  color: #783b03;
+  transition: 1s;
+}
+
+.mobile-search-bar:focus,
+.desktop-search-bar:focus,
+.search-bar:focus {
+  outline: none;
+  border-color: #783b03;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-nav-view {
+    display: none;
+  }
+
+  .desktop-nav-view {
+    display: contents;
+  }
+
+  .navbar {
+    height: 65px;
+    padding: 0 45px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .home-icon,
+  .search-icon {
+    font-size: 24px;
+  }
+
+  .desktop-search-bar {
+    margin-right: 0;
+  }
+
+  .cancel-search {
+    font-size: 10px;
+  }
+
+  .search-bar {
+    width: 90%;
+    height: 35px;
+  }
+}
