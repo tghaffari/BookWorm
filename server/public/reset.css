@@ -21,3 +21,8 @@ a {
   margin: 0;
   padding: 0;
 }
+
+.search-results-ul {
+  list-style: none;
+  padding: 0;
+}
