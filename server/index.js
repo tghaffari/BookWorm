@@ -35,39 +35,42 @@ app.post('/api/saveBooks', (req, res, next) => {
       'googleId, title, author, description, publishedDate, isbn, coverImgURL are required fields');
   }
 
-  let bookId = null;
-
   const sqlGetBookId = `
-    select *
+    select "bookId"
     from "books"
     where "isbn"= $1
   `;
   const paramsGetBookId = [isbn];
 
+  const sqlsaveBook = `
+    insert into "books"("googleId", "title", "author", "description", "publishedDate", "isbn", "coverImgURL")
+    values ($1, $2, $3, $4, $5, $6, $7)
+    returning *
+    `;
+  const paramsSaveBook = [googleId, title, author, description, publishedDate, isbn, coverImgURL];
+
+  const sqlLibrary = `
+      insert into "library" ("bookId", "userId")
+      values ($1, $2)
+      returning*
+      `;
+
   db.query(sqlGetBookId, paramsGetBookId)
     .then(resultingBook => {
-      const [book] = resultingBook.rows;
-      if (book) {
-        bookId = book.bookId;
-        res.status(201).json(book);
-      } else {
-        const sqlsaveBook = `
-          insert into "books"("googleId", "title", "author", "description", "publishedDate", "isbn", "coverImgURL")
-          values ($1, $2, $3, $4, $5, $6, $7)
-          returning *
-        `;
-        const paramsSaveBook = [googleId, title, author, description, publishedDate, isbn, coverImgURL];
-
-        db.query(sqlsaveBook, paramsSaveBook)
-          .then(result => {
-            const [savedBook] = result.rows;
-            bookId = savedBook.bookId;
-            res.status(201).json(savedBook);
-          })
-          .catch(err => next(err));
-      }
+      if (resultingBook.rows.length) return resultingBook.rows[0];
+      return db
+        .query(sqlsaveBook, paramsSaveBook)
+        .then(result => {
+          const [savedBook] = result.rows;
+          return savedBook.bookId;
+        });
     })
+    .then(bookId => {
+      const paramsLibrary = [Number(bookId), 1];
+      return db
+        .query(sqlLibrary, paramsLibrary)
+        .then(result => result.rows);
+    })
+    .then(result => res.status(201).json(result))
     .catch(err => next(err));
-
-}
-);
+});

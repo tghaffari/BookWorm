@@ -48,7 +48,7 @@ CREATE TABLE "public"."quotes" (
 
 
 CREATE TABLE "public"."library" (
-	"bookId" int NOT NULL,
+	"bookId" int NOT NULL UNIQUE,
 	"completedAt" timestamptz,
 	"savedAt" timestamptz NOT NULL default now(),
 	"userId" int NOT NULL
