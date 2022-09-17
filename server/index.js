@@ -28,8 +28,8 @@ app.listen(process.env.PORT, () => {
 });
 
 app.post('/api/saveBooks', (req, res, next) => {
-  const { googleId, title, author, description, publishedDate, isbn, coverImgURL } = req.body;
-  if (!googleId || !title || !author || !description || !publishedDate || !isbn || !coverImgURL) {
+  const { googleId, title, author, description, publishedYear, isbn, coverImgURL } = req.body;
+  if (!googleId || !title || !author || !description || !publishedYear || !isbn || !coverImgURL) {
     throw new ClientError(
       400,
       'googleId, title, author, description, publishedDate, isbn, coverImgURL are required fields');
@@ -43,11 +43,11 @@ app.post('/api/saveBooks', (req, res, next) => {
   const paramsGetBookId = [isbn];
 
   const sqlsaveBook = `
-    insert into "books"("googleId", "title", "author", "description", "publishedDate", "isbn", "coverImgURL")
+    insert into "books"("googleId", "title", "author", "description", "publishedYear", "isbn", "coverImgURL")
     values ($1, $2, $3, $4, $5, $6, $7)
     returning *
     `;
-  const paramsSaveBook = [googleId, title, author, description, publishedDate, isbn, coverImgURL];
+  const paramsSaveBook = [googleId, title, author, description, publishedYear, isbn, coverImgURL];
 
   const sqlLibrary = `
       insert into "library" ("bookId", "userId")
@@ -57,7 +57,7 @@ app.post('/api/saveBooks', (req, res, next) => {
 
   db.query(sqlGetBookId, paramsGetBookId)
     .then(resultingBook => {
-      if (resultingBook.rows.length) return resultingBook.rows[0];
+      if (resultingBook.rows.length) return resultingBook.rows[0].bookId;
       return db
         .query(sqlsaveBook, paramsSaveBook)
         .then(result => {

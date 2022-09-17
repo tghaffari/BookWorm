@@ -13,6 +13,7 @@ export default class SearchResults extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchSearchResults = this.fetchSearchResults.bind(this);
+    this.handleAddToLibrary = this.handleAddToLibrary.bind(this);
   }
 
   handleInputChange(event) {
@@ -51,6 +52,47 @@ export default class SearchResults extends React.Component {
       .catch(err => console.error(err));
   }
 
+  handleAddToLibrary(event) {
+    const closestLi = event.target.closest('li');
+    const index = closestLi.getAttribute('data-id');
+    const book = this.state.results[index];
+
+    let author = '';
+    if (book.volumeInfo.authors !== undefined) {
+      author = book.volumeInfo.authors.join(', ');
+    }
+    let publishedYear = '';
+    if (book.volumeInfo.publishedDate !== undefined) {
+      publishedYear = book.volumeInfo.publishedDate.slice(0, 4);
+    }
+
+    let src = 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg';
+    if (book.volumeInfo.imageLinks !== undefined) {
+      src = book.volumeInfo.imageLinks.thumbnail;
+    }
+
+    const bookDetails = {
+      googleId: book.id,
+      title: book.volumeInfo.title,
+      author,
+      description: book.volumeInfo.description,
+      publishedYear,
+      isbn: book.volumeInfo.industryIdentifiers[1].identifier,
+      coverImgURL: src
+    };
+
+    const init = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bookDetails)
+    };
+
+    fetch('/api/saveBooks', init)
+      .catch(err => console.error(err));
+  }
+
   componentDidMount() {
     this.fetchSearchResults();
   }
@@ -84,11 +126,17 @@ export default class SearchResults extends React.Component {
         src = results.volumeInfo.imageLinks.thumbnail;
       }
       return (
-        <li key={index} className="search-list-element">
+        <li key={index} className="search-list-element" data-id={index}>
           <div className="column-full ">
             <div className='row search-results-padding'>
               <div className='column-flex'>
                 <img className='search-image' src={src}></img>
+                <div className='column-full text-align-center'>
+                  <select name='addToLibrary' className='add-dropdown text-align-center' onChange={this.handleAddToLibrary}>
+                    <option value="" disabled selected>ADD TO LIBRARY</option>
+                    <option value='to-read'>TO-READ</option>
+                  </select>
+                </div>
               </div>
               <div className='column-flex book-details-container'>
                 <h3 className='search-book-title'>{results.volumeInfo.title}</h3>
