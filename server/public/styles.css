@@ -156,12 +156,24 @@
   padding-top: 10px;
 }
 
+.add-dropdown {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  margin-top: 10px;
+  background-color: #f67070;
+  color: #f8f8ee;
+  height: 30px;
+  border: none;
+  border-radius: 2px;
+}
+
 .search-icon:hover,
 .home-icon:hover,
 .nav-item:hover,
 .cancel-search:hover,
 .cancel-search-desktop:hover,
-.nav-text {
+.nav-text,
+.add-dropdown:hover {
   cursor: pointer;
 }
 
