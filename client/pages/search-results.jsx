@@ -80,17 +80,20 @@ export default class SearchResults extends React.Component {
       isbn: book.volumeInfo.industryIdentifiers[1].identifier,
       coverImgURL: src
     };
+    if (event.target.value === 'to-read') {
+      const init = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bookDetails)
+      };
 
-    const init = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bookDetails)
-    };
-
-    fetch('/api/saveBooks', init)
-      .catch(err => console.error(err));
+      fetch('/api/saveBooks', init)
+        .catch(err => console.error(err));
+    } else if (event.target.value === 'read') {
+      console.log('hi');
+    }
   }
 
   componentDidMount() {
@@ -134,6 +137,7 @@ export default class SearchResults extends React.Component {
                 <div className='column-full text-align-center'>
                   <select name='addToLibrary' className='add-dropdown text-align-center' onChange={this.handleAddToLibrary}>
                     <option value="" disabled selected>ADD TO LIBRARY</option>
+                    <option value='read'>READ</option>
                     <option value='to-read'>TO-READ</option>
                   </select>
                 </div>

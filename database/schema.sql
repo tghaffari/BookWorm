@@ -48,10 +48,11 @@ CREATE TABLE "public"."quotes" (
 
 
 CREATE TABLE "public"."library" (
-	"bookId" int NOT NULL UNIQUE,
+	"bookId" int NOT NULL,
 	"completedAt" timestamptz,
 	"savedAt" timestamptz NOT NULL default now(),
-	"userId" int NOT NULL
+	"userId" int NOT NULL,
+  unique ("userId", "bookId")
 ) WITH (
   OIDS=FALSE
 );
