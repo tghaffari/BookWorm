@@ -28,14 +28,19 @@ app.listen(process.env.PORT, () => {
 });
 
 app.post('/api/saveBooks', (req, res, next) => {
-  const { googleId, title, author, description, publishedYear, isbn, coverImgURL, ...rest } = req.body;
+  const { googleId, title, author, publishedYear, isbn, coverImgURL, ...rest } = req.body;
 
   let completedAt = null;
   if (rest.completedAt !== undefined) {
     completedAt = rest.completedAt;
   }
 
-  if (!googleId || !title || !author || !description || !publishedYear || !isbn || !coverImgURL) {
+  let description = null;
+  if (rest.description !== undefined) {
+    description = rest.description;
+  }
+
+  if (!googleId || !title || !author || !publishedYear || !isbn || !coverImgURL) {
     throw new ClientError(
       400,
       'googleId, title, author, description, publishedYear, isbn, coverImgURL are required fields');
