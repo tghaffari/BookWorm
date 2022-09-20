@@ -1,5 +1,6 @@
 import React from 'react';
 import parseRoute from '../lib/parse-route';
+import BookEntryDetailsModal from '../components/book-entry-details';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -8,12 +9,15 @@ export default class SearchResults extends React.Component {
     this.state = {
       searchValue: startValue,
       isLoading: true,
-      results: []
+      results: [],
+      showModal: false,
+      selectedBook: null
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchSearchResults = this.fetchSearchResults.bind(this);
     this.handleAddToLibrary = this.handleAddToLibrary.bind(this);
+    this.closeBookDetailsModal = this.closeBookDetailsModal.bind(this);
   }
 
   handleInputChange(event) {
@@ -29,7 +33,7 @@ export default class SearchResults extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const query = this.state.searchValue.replaceAll(' ', '+');
-    window.location.hash = (`search?q='${query}`);
+    window.location.hash = (`search?q=${query}`);
     return null;
   }
 
@@ -49,6 +53,19 @@ export default class SearchResults extends React.Component {
           });
         }
       })
+      .catch(err => console.error(err));
+  }
+
+  saveBook(bookDetails) {
+    const init = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bookDetails)
+    };
+
+    fetch('/api/saveBooks', init)
       .catch(err => console.error(err));
   }
 
@@ -80,20 +97,19 @@ export default class SearchResults extends React.Component {
       isbn: book.volumeInfo.industryIdentifiers[1].identifier,
       coverImgURL: src
     };
-    if (event.target.value === 'to-read') {
-      const init = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(bookDetails)
-      };
 
-      fetch('/api/saveBooks', init)
-        .catch(err => console.error(err));
+    if (event.target.value === 'to-read') {
+      this.saveBook(bookDetails);
     } else if (event.target.value === 'read') {
-      console.log('hi');
+      this.setState({
+        showModal: true,
+        selectedBook: bookDetails
+      });
     }
+  }
+
+  closeBookDetailsModal() {
+    this.setState({ showModal: false });
   }
 
   componentDidMount() {
@@ -169,6 +185,7 @@ export default class SearchResults extends React.Component {
         <ul className="search-results-ul">
           {searchResults}
         </ul>
+        {this.state.showModal && <BookEntryDetailsModal book = {this.state.selectedBook} closeModal={this.closeBookDetailsModal} />}
       </>
     );
   }
