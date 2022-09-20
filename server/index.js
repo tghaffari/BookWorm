@@ -28,22 +28,20 @@ app.listen(process.env.PORT, () => {
 });
 
 app.post('/api/saveBooks', (req, res, next) => {
-  const { googleId, title, author, publishedYear, isbn, coverImgURL, ...rest } = req.body;
+  let { googleId, title, author, publishedYear, isbn, coverImgURL, completedAt = null, description = null } = req.body;
 
-  let completedAt = null;
-  if (rest.completedAt !== undefined) {
-    completedAt = rest.completedAt;
+  if (req.body.completedAt !== undefined) {
+    completedAt = req.body.completedAt;
   }
 
-  let description = null;
-  if (rest.description !== undefined) {
-    description = rest.description;
+  if (req.body.description !== undefined) {
+    description = req.body.description;
   }
 
   if (!googleId || !title || !author || !publishedYear || !isbn || !coverImgURL) {
     throw new ClientError(
       400,
-      'googleId, title, author, description, publishedYear, isbn, coverImgURL are required fields');
+      'googleId, title, author, publishedYear, isbn, coverImgURL are required fields');
   }
 
   const sqlGetBookId = `

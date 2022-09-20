@@ -4,19 +4,10 @@ export default class RenderSearchResult extends React.Component {
   render() {
     const { results, addToLibrary } = this.props;
 
-    let author = '';
-    if (results.volumeInfo.authors !== undefined) {
-      author = results.volumeInfo.authors.join(', ');
-    }
-    let publishedYear = '';
-    if (results.volumeInfo.publishedDate !== undefined) {
-      publishedYear = results.volumeInfo.publishedDate.slice(0, 4);
-    }
+    const author = results.volumeInfo.authors?.join(', ') ?? '';
+    const publishedYear = results.volumeInfo.publishedDate?.slice(0, 4) ?? '';
+    const src = results.volumeInfo.imageLinks?.thumbnail ?? '/images/no_book_cover.jpeg';
 
-    let src = 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg';
-    if (results.volumeInfo.imageLinks !== undefined) {
-      src = results.volumeInfo.imageLinks.thumbnail;
-    }
     return (
       <li key={results.id} className="search-list-element" data-id={results.id}>
         <div className='column-full'>
