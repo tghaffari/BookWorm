@@ -276,7 +276,9 @@
 .nav-text,
 .add-dropdown:hover,
 .book-modal-exit:hover,
-.modal-save-button:hover {
+.modal-save-button:hover,
+.bookshelf-select:hover,
+.completed-date:hover {
   cursor: pointer;
 }
 
