@@ -30,16 +30,9 @@ export default class BookEntryDetailsModal extends React.Component {
     const bookDetails = this.props.book;
     bookDetails.completedAt = this.state.completedDate;
 
-    const init = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bookDetails)
-    };
+    this.props.saveBook(bookDetails);
 
-    fetch('/api/saveBooks', init)
-      .catch(err => console.error(err));
+    this.props.closeModal();
   }
 
   render() {
@@ -63,13 +56,13 @@ export default class BookEntryDetailsModal extends React.Component {
         </>
       );
       input = <input type="date" id="completedDate" name="completedDate" className="completed-date-deselect" disabled />;
-      dateCompletedClassName = 'completed-date-label-deselct';
+      dateCompletedClassName = 'completed-date-label-deselect';
     }
 
     return (
       <div className='modal-background'>
         <div className='book-details-modal-window'>
-          <i className="bi bi-x book-modal-exit"></i>
+          <i className="bi bi-x book-modal-exit" onClick={this.props.closeModal}></i>
           <form onSubmit={this.handleModalSubmit}>
             <div className="row book-modal-padding">
               <div className='column-flex'>

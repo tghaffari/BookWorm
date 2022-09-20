@@ -11,7 +11,8 @@ export default class SearchResults extends React.Component {
       isLoading: true,
       results: [],
       showModal: false,
-      selectedBook: null
+      selectedBook: null,
+      addToLibraryOption: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -71,8 +72,8 @@ export default class SearchResults extends React.Component {
 
   handleAddToLibrary(event) {
     const closestLi = event.target.closest('li');
-    const index = closestLi.getAttribute('data-id');
-    const book = this.state.results[index];
+    const id = closestLi.getAttribute('data-id');
+    const book = this.state.results.find(result => result.id === id);
 
     let author = '';
     if (book.volumeInfo.authors !== undefined) {
@@ -100,10 +101,12 @@ export default class SearchResults extends React.Component {
 
     if (event.target.value === 'to-read') {
       this.saveBook(bookDetails);
+      this.setState({ addToLibraryOption: 'to-read' });
     } else if (event.target.value === 'read') {
       this.setState({
         showModal: true,
-        selectedBook: bookDetails
+        selectedBook: bookDetails,
+        addToLibraryOption: 'read'
       });
     }
   }
@@ -124,6 +127,7 @@ export default class SearchResults extends React.Component {
 
     if (prevParams !== currentParams) {
       this.fetchSearchResults();
+      this.setState({ addToLibraryOption: '' });
     }
   }
 
@@ -145,14 +149,14 @@ export default class SearchResults extends React.Component {
         src = results.volumeInfo.imageLinks.thumbnail;
       }
       return (
-        <li key={index} className="search-list-element" data-id={index}>
-          <div className="column-full ">
+        <li key={index} className="search-list-element" data-id={results.id}>
+          <div className='column-full'>
             <div className='row search-results-padding'>
               <div className='column-flex'>
                 <img className='search-image' src={src}></img>
                 <div className='column-full text-align-center'>
-                  <select name='addToLibrary' className='add-dropdown text-align-center' onChange={this.handleAddToLibrary}>
-                    <option value="" disabled selected>ADD TO LIBRARY</option>
+                  <select name='addToLibrary' className='add-dropdown text-align-center' onChange={this.handleAddToLibrary} id="library-add" value={this.state.addToLibraryOption}>
+                    <option value='' disabled selected>ADD TO LIBRARY</option>
                     <option value='read'>READ</option>
                     <option value='to-read'>TO-READ</option>
                   </select>
@@ -175,17 +179,17 @@ export default class SearchResults extends React.Component {
         <h1 className='search-heading'>Search</h1>
         <form onSubmit={this.handleSubmit}>
           <input
-          className="search-bar"
-          type="search"
-          placeholder="Search books..."
+          className='search-bar'
+          type='search'
+          placeholder='Search books...'
           value={this.state.searchValue}
           onChange={this.handleInputChange}>
           </input>
         </form>
-        <ul className="search-results-ul">
+        <ul className='search-results-ul'>
           {searchResults}
         </ul>
-        {this.state.showModal && <BookEntryDetailsModal book = {this.state.selectedBook} closeModal={this.closeBookDetailsModal} />}
+        {this.state.showModal && <BookEntryDetailsModal book = {this.state.selectedBook} closeModal={this.closeBookDetailsModal} saveBook = {this.saveBook}/>}
       </>
     );
   }
