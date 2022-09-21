@@ -28,15 +28,7 @@ app.listen(process.env.PORT, () => {
 });
 
 app.post('/api/saveBooks', (req, res, next) => {
-  let { googleId, title, author, publishedYear, isbn, coverImgURL, completedAt = null, description = null } = req.body;
-
-  if (req.body.completedAt !== undefined) {
-    completedAt = req.body.completedAt;
-  }
-
-  if (req.body.description !== undefined) {
-    description = req.body.description;
-  }
+  const { googleId, title, author, publishedYear, isbn, coverImgURL, completedAt = null, description = null } = req.body;
 
   if (!googleId || !title || !author || !publishedYear || !isbn || !coverImgURL) {
     throw new ClientError(
