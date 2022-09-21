@@ -77,3 +77,17 @@ app.post('/api/saveBooks', (req, res, next) => {
     .then(result => res.status(201).json(result))
     .catch(err => next(err));
 });
+
+app.get('/api/getAllBooks', (req, res, next) => {
+  const sql = `
+  select *
+  from "books"
+  join "library" using ("bookId")
+  where "userId" = 1
+  order by "savedAt" desc
+  `;
+
+  db.query(sql)
+    .then(result => res.status(201).json(result.rows))
+    .catch(err => next(err));
+});

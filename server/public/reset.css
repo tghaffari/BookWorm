@@ -26,3 +26,17 @@ a {
   list-style: none;
   padding: 0;
 }
+
+.mobile-navbar-list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.library-books-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}

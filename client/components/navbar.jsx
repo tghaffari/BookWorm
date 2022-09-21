@@ -42,19 +42,31 @@ export default class Navbar extends React.Component {
   render() {
     const bottomNav = this.state.search
       ? (
-        <form onSubmit={this.handleSearchSubmit}>
-          <input
-          type="search"
-          placeholder='Search Books'
-          className='mobile-search-bar'
-          value={this.state.searchValue}
-          onChange={this.handleInputChange}>
-
-          </input>
-          <a className='cancel-search' onClick={this.handleCancelClick}>Cancel</a>
-        </form>
+        <div className='row nav-search-row justify-content-center align-items-center'>
+          <div className="column-full text-align-center">
+            <form onSubmit={this.handleSearchSubmit}>
+              <input
+              type="search"
+              placeholder='Search Books'
+              className='mobile-search-bar'
+              value={this.state.searchValue}
+              onChange={this.handleInputChange}>
+              </input>
+              <a className='cancel-search' onClick={this.handleCancelClick}>Cancel</a>
+            </form>
+          </div>
+        </div>
         )
-      : (<a href="#home"><i className='fa-solid fa-house home-icon'></i></a>);
+      : (
+        <ul className="row align-items-center justify-content-center mobile-navbar-list">
+          <li className='column-one-third'>
+            <a href="#home"><i className='fa-solid fa-house home-icon'></i></a>
+          </li>
+          <li className='column-one-third'>
+            <a href="#library"><i className="fa-solid fa-book book-icon"></i></a>
+          </li>
+        </ul>
+        );
 
     const desktopNav = this.state.search
       ? (
@@ -78,7 +90,7 @@ export default class Navbar extends React.Component {
     return (
     <>
       <div className="mobile-nav-view">
-        <nav className="navbar box-shadow row align-items-center justify-content-center">
+        <nav className="navbar box-shadow row align-items-center">
           <div className="column-one-third">
               <a><i className="bi bi-search search-icon" onClick={this.handleSearchClick}></i></a>
           </div>
@@ -88,10 +100,8 @@ export default class Navbar extends React.Component {
           <div className="column-one-third">
           </div>
         </nav>
-        <div className="navbar bottom-shadow row justify-content-center align-items-center">
-          <div className="column-full text-align-center">
-            {bottomNav}
-          </div>
+        <div className="navbar bottom-shadow">
+          {bottomNav}
         </div>
       </div>
       <div className="desktop-nav-view">
@@ -107,6 +117,10 @@ export default class Navbar extends React.Component {
                   <p className="nav-text">Home</p>
                 </a>
               </li >
+              <li className='nav-items-padding text-align-center'>
+                <a href="#library"><i className="fa-solid fa-book book-icon"></i></a>
+                <p className='nav-text'>Library</p>
+              </li>
               <li className="nav-items-padding text-align-center">
                {desktopNav}
               </li>
