@@ -10,6 +10,10 @@
   justify-content: space-between;
 }
 
+.justify-content-end {
+  justify-content: flex-end;
+}
+
 .align-items-center {
   align-items: center;
 }
@@ -167,27 +171,132 @@
   border-radius: 2px;
 }
 
+.modal-background {
+  background-color: rgba(0 0 0/ 0.8);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+}
+
+.book-details-modal-window {
+  border: none;
+  background-color: #f2e7e2;
+  width: 80%;
+  height: 22rem;
+}
+
+.book-modal-exit {
+  position: relative;
+  top: 5px;
+  left: 5px;
+  font-size: 18px;
+}
+
+.book-modal-padding {
+  padding: 10px 25px;
+}
+
+.book-image {
+  width: 80px;
+  object-fit: contain;
+}
+
+.modal-book-details {
+  font-family: Inter, sans-serif;
+  margin-left: 10px;
+}
+
+.modal-book-title {
+  font-size: 16px;
+  margin: 0;
+}
+
+.modal-author,
+.modal-date {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.bookshelf-label,
+.bookshelf-select,
+.completed-date-label,
+.completed-date-label-deselect {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+}
+
+.bookshelf-select,
+.completed-date,
+.completed-date-deselect {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  color: #f67070;
+  height: 30px;
+  width: 100px;
+  border: solid 1px;
+  border-radius: 2px;
+  text-align: center;
+  margin-left: 5px;
+}
+
+.completed-date-label-deselect {
+  color: rgb(174, 169, 169);
+}
+
+.completed-date-deselect {
+  color: rgb(174, 169, 169);
+}
+
+.completed-date {
+  width: 125px;
+}
+
+.modal-save-button {
+  background-color: #f67070;
+  color: #f2e7e2;
+  border: none;
+  border-radius: 2px;
+  height: 30px;
+  width: 90px;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
 .search-icon:hover,
 .home-icon:hover,
 .nav-item:hover,
 .cancel-search:hover,
 .cancel-search-desktop:hover,
 .nav-text,
-.add-dropdown:hover {
+.add-dropdown:hover,
+.book-modal-exit:hover,
+.modal-save-button:hover,
+.bookshelf-select:hover,
+.completed-date:hover {
   cursor: pointer;
 }
 
 .search-icon:hover,
 .home-icon:hover,
 .cancel-search:hover,
-.cancel-search-desktop:hover {
+.cancel-search-desktop:hover,
+.book-modal-exit:hover {
   color: #783b03;
   transition: 1s;
 }
 
 .mobile-search-bar:focus,
 .desktop-search-bar:focus,
-.search-bar:focus {
+.search-bar:focus,
+.bookshelf-select:focus,
+.completed-date:focus,
+.add-dropdown:focus {
   outline: none;
   border-color: #783b03;
 }
@@ -226,5 +335,43 @@
   .search-bar {
     width: 90%;
     height: 35px;
+  }
+
+  .book-details-modal-window {
+    width: 400px;
+    height: 27rem;
+  }
+
+  .book-modal-exit {
+    font-size: 24px;
+  }
+
+  .book-modal-padding {
+    padding: 15px 45px;
+  }
+
+  .book-image {
+    width: 100px;
+    object-fit: contain;
+  }
+
+  .modal-book-title {
+    font-size: 20px;
+  }
+
+  .modal-author,
+  .modal-date {
+    font-size: 16px;
+  }
+
+  .bookshelf-select,
+  .completed-date,
+  .completed-date-deselect {
+    height: 25px;
+    width: 120px;
+  }
+
+  .modal-save-button {
+    margin-top: 40px;
   }
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 import parseRoute from '../lib/parse-route';
+import BookEntryDetailsModal from '../components/book-entry-details';
+import RenderSearchResult from '../components/render-search-results';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -8,12 +10,15 @@ export default class SearchResults extends React.Component {
     this.state = {
       searchValue: startValue,
       isLoading: true,
-      results: []
+      results: [],
+      showModal: false,
+      selectedBook: null
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchSearchResults = this.fetchSearchResults.bind(this);
     this.handleAddToLibrary = this.handleAddToLibrary.bind(this);
+    this.closeBookDetailsModal = this.closeBookDetailsModal.bind(this);
   }
 
   handleInputChange(event) {
@@ -29,7 +34,7 @@ export default class SearchResults extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const query = this.state.searchValue.replaceAll(' ', '+');
-    window.location.hash = (`search?q='${query}`);
+    window.location.hash = (`search?q=${query}`);
     return null;
   }
 
@@ -52,10 +57,23 @@ export default class SearchResults extends React.Component {
       .catch(err => console.error(err));
   }
 
+  saveBook(bookDetails) {
+    const init = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bookDetails)
+    };
+
+    fetch('/api/saveBooks', init)
+      .catch(err => console.error(err));
+  }
+
   handleAddToLibrary(event) {
     const closestLi = event.target.closest('li');
-    const index = closestLi.getAttribute('data-id');
-    const book = this.state.results[index];
+    const id = closestLi.getAttribute('data-id');
+    const book = this.state.results.find(result => result.id === id);
 
     let author = '';
     if (book.volumeInfo.authors !== undefined) {
@@ -81,16 +99,19 @@ export default class SearchResults extends React.Component {
       coverImgURL: src
     };
 
-    const init = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bookDetails)
-    };
+    if (event.target.value === 'to-read') {
+      this.saveBook(bookDetails);
 
-    fetch('/api/saveBooks', init)
-      .catch(err => console.error(err));
+    } else if (event.target.value === 'read') {
+      this.setState({
+        showModal: true,
+        selectedBook: bookDetails
+      });
+    }
+  }
+
+  closeBookDetailsModal() {
+    this.setState({ showModal: false });
   }
 
   componentDidMount() {
@@ -112,42 +133,7 @@ export default class SearchResults extends React.Component {
     if (this.state.isLoading) return null;
 
     const searchResults = this.state.results.map((results, index) => {
-      let author = '';
-      if (results.volumeInfo.authors !== undefined) {
-        author = results.volumeInfo.authors.join(', ');
-      }
-      let publishedYear = '';
-      if (results.volumeInfo.publishedDate !== undefined) {
-        publishedYear = results.volumeInfo.publishedDate.slice(0, 4);
-      }
-
-      let src = 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg';
-      if (results.volumeInfo.imageLinks !== undefined) {
-        src = results.volumeInfo.imageLinks.thumbnail;
-      }
-      return (
-        <li key={index} className="search-list-element" data-id={index}>
-          <div className="column-full ">
-            <div className='row search-results-padding'>
-              <div className='column-flex'>
-                <img className='search-image' src={src}></img>
-                <div className='column-full text-align-center'>
-                  <select name='addToLibrary' className='add-dropdown text-align-center' onChange={this.handleAddToLibrary}>
-                    <option value="" disabled selected>ADD TO LIBRARY</option>
-                    <option value='to-read'>TO-READ</option>
-                  </select>
-                </div>
-              </div>
-              <div className='column-flex book-details-container'>
-                <h3 className='search-book-title'>{results.volumeInfo.title}</h3>
-                <p className='search-author'>{author}</p>
-                <p className='search-date'>{publishedYear}</p>
-                <p className='search-synopsis'>{results.volumeInfo.description}</p>
-              </div>
-            </div>
-          </div>
-        </li>
-      );
+      return <RenderSearchResult results={results} addToLibrary = {this.handleAddToLibrary} key={results.id}/>;
     });
 
     return (
@@ -155,16 +141,17 @@ export default class SearchResults extends React.Component {
         <h1 className='search-heading'>Search</h1>
         <form onSubmit={this.handleSubmit}>
           <input
-          className="search-bar"
-          type="search"
-          placeholder="Search books..."
+          className='search-bar'
+          type='search'
+          placeholder='Search books...'
           value={this.state.searchValue}
           onChange={this.handleInputChange}>
           </input>
         </form>
-        <ul className="search-results-ul">
+        <ul className='search-results-ul'>
           {searchResults}
         </ul>
+        {this.state.showModal && <BookEntryDetailsModal book = {this.state.selectedBook} closeModal={this.closeBookDetailsModal} saveBook = {this.saveBook}/>}
       </>
     );
   }

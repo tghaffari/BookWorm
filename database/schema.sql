@@ -24,7 +24,7 @@ CREATE TABLE "public"."books" (
 	"googleId" TEXT NOT NULL,
 	"title" TEXT NOT NULL,
 	"author" TEXT NOT NULL,
-	"description" TEXT NOT NULL,
+	"description" TEXT,
 	"publishedYear" TEXT NOT NULL,
 	"isbn" TEXT NOT NULL UNIQUE,
 	"coverImgURL" TEXT NOT NULL,
@@ -48,10 +48,11 @@ CREATE TABLE "public"."quotes" (
 
 
 CREATE TABLE "public"."library" (
-	"bookId" int NOT NULL UNIQUE,
+	"bookId" int NOT NULL,
 	"completedAt" timestamptz,
 	"savedAt" timestamptz NOT NULL default now(),
-	"userId" int NOT NULL
+	"userId" int NOT NULL,
+  unique ("userId", "bookId")
 ) WITH (
   OIDS=FALSE
 );
