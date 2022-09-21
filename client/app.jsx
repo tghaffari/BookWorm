@@ -3,6 +3,7 @@ import Navbar from './components/navbar';
 import parseRoute from './lib/parse-route';
 import SearchResults from './pages/search-results';
 import PageContainer from './components/page-container';
+import MyBooks from './pages/my-books';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -24,6 +25,8 @@ export default class App extends React.Component {
     const { path, params } = this.state.route;
     if (path === 'search') {
       return <SearchResults params={ params}/>;
+    } else if (path === 'library') {
+      return <MyBooks />;
     }
   }
 
