@@ -95,7 +95,10 @@ export default class Navbar extends React.Component {
               <a><i className="bi bi-search search-icon" onClick={this.handleSearchClick}></i></a>
           </div>
           <div className="column-one-third text-align-center">
-            <h1 className="title">Bibliophile</h1>
+              <div className='row align-items-center'>
+                <img className='logo' src='/images/Bookworm-logo.png'></img>
+                <h1 className="title">BookWorm</h1>
+              </div>
           </div>
           <div className="column-one-third">
           </div>
@@ -107,7 +110,11 @@ export default class Navbar extends React.Component {
       <div className="desktop-nav-view">
         <nav className="navbar row align-items-center box-shadow justify-content-space-between">
           <div className="flex">
-            <h1 className="title">Bibliophile</h1>
+            <div className='row align-items-center'>
+                <img className='logo' src='/images/Bookworm-logo.png'></img>
+                <h1 className="title">BookWorm</h1>
+            </div>
+
           </div>
           <div className="column-flex text-align-end">
             <ul className="navigation-list align-items-end">
