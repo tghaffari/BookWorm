@@ -4,6 +4,7 @@ import parseRoute from './lib/parse-route';
 import SearchResults from './pages/search-results';
 import PageContainer from './components/page-container';
 import MyBooks from './pages/my-books';
+import Home from './pages/home';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,6 +28,8 @@ export default class App extends React.Component {
       return <SearchResults params={ params}/>;
     } else if (path === 'library') {
       return <MyBooks />;
+    } else if (path === 'home') {
+      return <Home />;
     }
   }
 

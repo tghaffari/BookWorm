@@ -22,7 +22,9 @@ a {
   padding: 0;
 }
 
-.search-results-ul {
+.search-results-ul,
+.read-shelf-list,
+.to-read-shelf-list {
   list-style: none;
   padding: 0;
 }

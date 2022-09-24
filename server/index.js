@@ -91,3 +91,37 @@ app.get('/api/getAllBooks', (req, res, next) => {
     .then(result => res.status(201).json(result.rows))
     .catch(err => next(err));
 });
+
+app.get('/api/getRecentBooks', (req, res, next) => {
+  const sqlRecentBooks = `
+  with "read" as (
+  select *
+    from "books"
+  join "library" using("bookId")
+  where "library"."userId" = 1 and
+        "library"."completedAt" is not NULL
+  order by "library"."savedAt" desc
+  limit 5
+  ), "unread" as (
+    select *
+    from "books"
+  join "library" using("bookId")
+  where "library"."userId" = 1 and
+        "library"."completedAt" is NULL
+  order by "library"."savedAt" desc
+  limit 5
+  )
+
+  select *
+    from "read"
+  union
+  select *
+    from "unread"
+  order by "completedAt",
+  "savedAt" desc
+  `;
+
+  db.query(sqlRecentBooks)
+    .then(result => res.status(201).json(result.rows))
+    .catch(err => next(err));
+});
