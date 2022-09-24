@@ -383,6 +383,22 @@
   display: none;
 }
 
+.home-placeholder-text {
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+  color: #f67070;
+  position: relative;
+  top: -40px;
+}
+
+.placeholder-books {
+  width: 200px;
+}
+
+.placeholder-column-size {
+  height: 100px;
+}
+
 .search-icon:hover,
 .home-icon:hover,
 .nav-item:hover,
@@ -526,5 +542,19 @@
 
   .cover-li:nth-of-type(1n+4) {
     display: contents;
+  }
+
+  .home-placeholder-text {
+    font-size: 17px;
+    position: relative;
+    top: -80px;
+  }
+
+  .placeholder-books {
+    width: 300px;
+  }
+
+  .placeholder-column-size {
+    height: 155px;
   }
 }
