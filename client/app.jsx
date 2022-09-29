@@ -5,6 +5,7 @@ import SearchResults from './pages/search-results';
 import PageContainer from './components/page-container';
 import MyBooks from './pages/my-books';
 import Home from './pages/home';
+import AuthPage from './pages/auth';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,6 +31,8 @@ export default class App extends React.Component {
       return <MyBooks />;
     } else if (path === 'home') {
       return <Home />;
+    } else if (path === 'sign-in') {
+      return <AuthPage path = {this.state.route.path} />;
     }
   }
 

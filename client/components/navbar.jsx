@@ -97,7 +97,7 @@ export default class Navbar extends React.Component {
           <div className="column-one-third text-align-center">
               <div className='row align-items-center'>
                 <img className='logo' src='/images/Bookworm-logo.png'></img>
-                <h1 className="title">BookWorm</h1>
+                <h1 className="title">BookWormFuze</h1>
               </div>
           </div>
           <div className="column-one-third">
@@ -112,7 +112,7 @@ export default class Navbar extends React.Component {
           <div className="flex">
             <div className='row align-items-center'>
                 <img className='logo' src='/images/Bookworm-logo.png'></img>
-                <h1 className="title">BookWorm</h1>
+                <h1 className="title">BookWormFuze</h1>
             </div>
 
           </div>

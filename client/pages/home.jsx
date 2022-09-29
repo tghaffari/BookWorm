@@ -20,7 +20,7 @@ export default class Home extends React.Component {
           if (book.completedAt !== null) {
             readBooks.unshift(book);
           } else {
-            unreadBooks.unshift(book);
+            unreadBooks.push(book);
           }
         });
         this.setState({ readBooks, unreadBooks });

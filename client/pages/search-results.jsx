@@ -75,19 +75,9 @@ export default class SearchResults extends React.Component {
     const id = closestLi.getAttribute('data-id');
     const book = this.state.results.find(result => result.id === id);
 
-    let author = '';
-    if (book.volumeInfo.authors !== undefined) {
-      author = book.volumeInfo.authors.join(', ');
-    }
-    let publishedYear = '';
-    if (book.volumeInfo.publishedDate !== undefined) {
-      publishedYear = book.volumeInfo.publishedDate.slice(0, 4);
-    }
-
-    let src = 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg';
-    if (book.volumeInfo.imageLinks !== undefined) {
-      src = book.volumeInfo.imageLinks.thumbnail;
-    }
+    const author = book.volumeInfo.authors?.join(', ') ?? '';
+    const publishedYear = book.volumeInfo.publishedDate?.slice(0, 4) ?? '';
+    const src = book.volumeInfo.imageLinks?.thumbnail ?? 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg';
 
     const bookDetails = {
       googleId: book.id,
