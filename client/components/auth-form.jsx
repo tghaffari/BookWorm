@@ -47,10 +47,6 @@ export default class AuthForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    if (!this.state.validPassword) {
-      this.setState({ showErrorMessage: true });
-    }
-
     const data = {
       username: this.state.username,
       password: this.state.password,
