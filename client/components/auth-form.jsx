@@ -70,7 +70,8 @@ export default class AuthForm extends React.Component {
             this.setState({
               username: '',
               password: '',
-              name: ''
+              name: '',
+              validPassword: false
             });
           }
         })
