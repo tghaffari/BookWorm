@@ -1,4 +1,6 @@
 import React from 'react';
+import Redirect from '../components/redirect';
+import AppContext from '../lib/app-context';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -20,7 +22,7 @@ export default class Home extends React.Component {
           if (book.completedAt !== null) {
             readBooks.unshift(book);
           } else {
-            unreadBooks.unshift(book);
+            unreadBooks.push(book);
           }
         });
         this.setState({ readBooks, unreadBooks });
@@ -33,6 +35,8 @@ export default class Home extends React.Component {
   }
 
   render() {
+    if (!this.context.user) return <Redirect to="sign-up" />;
+
     if (this.state.readBooks === null && this.state.unreadBooks === null) {
       return null;
     }
@@ -114,3 +118,5 @@ export default class Home extends React.Component {
     );
   }
 }
+
+Home.contextType = AppContext;

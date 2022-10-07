@@ -4,6 +4,7 @@ const staticMiddleware = require('./static-middleware');
 const errorMiddleware = require('./error-middleware');
 const ClientError = require('./client-error');
 const pg = require('pg');
+const argon2 = require('argon2');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -16,10 +17,6 @@ const app = express();
 
 app.use(express.json());
 app.use(staticMiddleware);
-
-app.get('/api/hello', (req, res) => {
-  res.json({ hello: 'world' });
-});
 
 app.use(errorMiddleware);
 
@@ -100,7 +97,7 @@ app.get('/api/getRecentBooks', (req, res, next) => {
   join "library" using("bookId")
   where "library"."userId" = 1 and
         "library"."completedAt" is not NULL
-  order by "library"."savedAt" desc
+  order by "library"."completedAt" desc
   limit 5
   ), "unread" as (
     select *
@@ -123,5 +120,34 @@ app.get('/api/getRecentBooks', (req, res, next) => {
 
   db.query(sqlRecentBooks)
     .then(result => res.status(201).json(result.rows))
+    .catch(err => next(err));
+});
+
+app.post('/api/auth/sign-up', (req, res, next) => {
+  const { username, password, name } = req.body;
+  if (!username || !password || !name) {
+    throw new ClientError(400, 'username, password, and name are required fields');
+  }
+  argon2
+    .hash(password)
+    .then(hashedPassword => {
+      const sql = `
+      insert into "users" ("username", "hashedPassword", "name")
+      values ($1, $2, $3)
+      on conflict ("username")
+      do nothing
+      returning "userId", "username", "name"
+      `;
+      const params = [username, hashedPassword, name];
+      return db.query(sql, params);
+    })
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(409, 'username exists');
+      } else {
+        res.status(201).json(user);
+      }
+    })
     .catch(err => next(err));
 });

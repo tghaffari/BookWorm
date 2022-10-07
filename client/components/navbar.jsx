@@ -5,7 +5,8 @@ export default class Navbar extends React.Component {
     super(props);
     this.state = {
       search: false,
-      searchValue: ''
+      searchValue: '',
+      user: null
     };
     this.handleSearchClick = this.handleSearchClick.bind(this);
     this.handleCancelClick = this.handleCancelClick.bind(this);
@@ -40,6 +41,8 @@ export default class Navbar extends React.Component {
   }
 
   render() {
+    if (!this.state.user) return null;
+
     const bottomNav = this.state.search
       ? (
         <div className='row nav-search-row justify-content-center align-items-center'>
