@@ -6,6 +6,7 @@ import PageContainer from './components/page-container';
 import MyBooks from './pages/my-books';
 import Home from './pages/home';
 import AuthPage from './pages/auth';
+import AuthBackround from './components/auth-background';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ export default class App extends React.Component {
       return <MyBooks />;
     } else if (path === 'home') {
       return <Home />;
-    } else if (path === 'sign-in') {
+    } else if (path === 'sign-up') {
       return <AuthPage path = {this.state.route.path} />;
     }
   }
@@ -40,6 +41,7 @@ export default class App extends React.Component {
     return (
       <>
           <Navbar />
+          <AuthBackround />
           <PageContainer >
             {this.renderPage()}
           </PageContainer>

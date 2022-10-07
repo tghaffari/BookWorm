@@ -5,7 +5,8 @@ export default class Navbar extends React.Component {
     super(props);
     this.state = {
       search: false,
-      searchValue: ''
+      searchValue: '',
+      user: null
     };
     this.handleSearchClick = this.handleSearchClick.bind(this);
     this.handleCancelClick = this.handleCancelClick.bind(this);
@@ -40,6 +41,8 @@ export default class Navbar extends React.Component {
   }
 
   render() {
+    if (!this.state.user) return null;
+
     const bottomNav = this.state.search
       ? (
         <div className='row nav-search-row justify-content-center align-items-center'>
@@ -97,7 +100,7 @@ export default class Navbar extends React.Component {
           <div className="column-one-third text-align-center">
               <div className='row align-items-center'>
                 <img className='logo' src='/images/Bookworm-logo.png'></img>
-                <h1 className="title">BookWormFuze</h1>
+                <h1 className="title">BookWorm</h1>
               </div>
           </div>
           <div className="column-one-third">
@@ -112,7 +115,7 @@ export default class Navbar extends React.Component {
           <div className="flex">
             <div className='row align-items-center'>
                 <img className='logo' src='/images/Bookworm-logo.png'></img>
-                <h1 className="title">BookWormFuze</h1>
+                <h1 className="title">BookWorm</h1>
             </div>
 
           </div>

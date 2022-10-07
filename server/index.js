@@ -18,10 +18,6 @@ const app = express();
 app.use(express.json());
 app.use(staticMiddleware);
 
-app.get('/api/hello', (req, res) => {
-  res.json({ hello: 'world' });
-});
-
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
@@ -138,6 +134,8 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       const sql = `
       insert into "users" ("username", "hashedPassword", "name")
       values ($1, $2, $3)
+      on conflict ("username")
+      do nothing
       returning "userId", "username", "name"
       `;
       const params = [username, hashedPassword, name];
@@ -145,7 +143,11 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     })
     .then(result => {
       const [user] = result.rows;
-      res.status(201).json(user);
+      if (!user) {
+        throw new ClientError(409, 'username exists');
+      } else {
+        res.status(201).json(user);
+      }
     })
     .catch(err => next(err));
 });

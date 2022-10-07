@@ -399,6 +399,134 @@
   height: 100px;
 }
 
+.auth-background {
+  background-color: rgb(157, 16, 16);
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  position: fixed;
+}
+
+.auth-top-padding {
+  padding-top: 2rem;
+}
+
+.auth-logo {
+  width: 60px;
+  display: inline;
+  vertical-align: middle;
+  margin-left: -3rem;
+}
+
+.auth-title {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: "Anek Latin", sans-serif;
+  font-weight: 300;
+  font-size: 2rem;
+  color: white;
+}
+
+.auth-welcome-message {
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  margin-top: 0;
+  font-weight: 200;
+  color: white;
+}
+
+.auth-form-background {
+  background-color: #ffe99b;
+  width: 100%;
+  height: 25rem;
+  padding: 2rem;
+  border-radius: 4px;
+  box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.65);
+}
+
+.position-relative {
+  position: relative;
+}
+
+.auth-form-label {
+  display: block;
+  font-family: Inter, sans-serif;
+  color: #152536;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.auth-form-field {
+  border: solid 1px lightgray;
+  border-radius: 2px;
+  height: 30px;
+  width: 100%;
+  font-family: Inter, sans-serif;
+  color: #152536;
+}
+
+.form-margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.auth-form-margin-top {
+  margin-top: 1.1rem;
+}
+
+.username-error {
+  font-family: Inter, sans-serif;
+  color: #a50505;
+  font-size: 0.65rem;
+  margin-top: -0.8rem;
+}
+
+.password-x {
+  color: red;
+  font-size: 1.3rem;
+  position: absolute;
+  top: 6rem;
+}
+
+.password-check {
+  color: rgb(110, 180, 6);
+  font-size: 1.3rem;
+  position: absolute;
+  top: 6rem;
+}
+
+.password-reqs {
+  font-family: Inter, sans-serif;
+  color: #4c4d4e;
+  font-size: 0.6rem;
+  margin-top: 0.2rem;
+}
+
+.sub-reqs {
+  display: block;
+  padding-left: 0.7rem;
+}
+
+.auth-button {
+  color: #f8f8ee;
+  background-color: #f67070;
+  border: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 2px;
+}
+
+.auth-redirect-link {
+  text-decoration: underline 0.8px;
+  color: #152536;
+  font-family: Inter, sans-serif;
+  font-size: 0.7rem;
+}
+
+.break {
+  display: block;
+  content: "";
+  margin-top: -0.1rem;
+}
+
 .search-icon:hover,
 .home-icon:hover,
 .nav-item:hover,
@@ -411,7 +539,8 @@
 .bookshelf-select:hover,
 .completed-date:hover,
 .home-read-shelf-title,
-.home-to-read-shelf-title {
+.home-to-read-shelf-title,
+.auth-button:hover {
   cursor: pointer;
 }
 
@@ -433,6 +562,11 @@
 .add-dropdown:focus {
   outline: none;
   border-color: #783b03;
+}
+
+.auth-form-field:focus {
+  outline: none;
+  border-color: #f67070;
 }
 
 @media screen and (min-width: 768px) {
