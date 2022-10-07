@@ -1,4 +1,6 @@
 import React from 'react';
+import Redirect from '../components/redirect';
+import AppContext from '../lib/app-context';
 
 export default class MyBooks extends React.Component {
   constructor(props) {
@@ -25,6 +27,8 @@ export default class MyBooks extends React.Component {
   }
 
   render() {
+    if (!this.context.user) return <Redirect to="sign-up" />;
+
     if (this.state.myBooks === null) return null;
 
     if (this.state.myBooks.length === 0) {
@@ -81,3 +85,5 @@ export default class MyBooks extends React.Component {
     );
   }
 }
+
+MyBooks.contextType = AppContext;

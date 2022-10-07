@@ -70,6 +70,12 @@ export default class AuthForm extends React.Component {
         .then(res => {
           if (res.status === 409) {
             this.setState({ validUsername: false });
+          } else {
+            this.setState({
+              username: '',
+              password: '',
+              name: ''
+            });
           }
         })
         .catch(err => console.error(err));
@@ -89,7 +95,7 @@ export default class AuthForm extends React.Component {
       <div className='auth-form-background'>
         <form onSubmit={this.handleSubmit}>
           <div className='row'>
-            <div className='column-full position-relative'>
+            <div className='column-full'>
               <label htmlFor='username' className='auth-form-label'>Username</label>
               <input
               required
@@ -101,6 +107,10 @@ export default class AuthForm extends React.Component {
               value={this.state.username}
               onChange={this.handleInputChange} />
               <p className={usernameMessage}>Username already exists. Please try something else.</p>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='column-full position-relative'>
               <label htmlFor='password' className='auth-form-label'>Password</label>
               <input
                 required

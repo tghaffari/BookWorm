@@ -7,12 +7,16 @@ import MyBooks from './pages/my-books';
 import Home from './pages/home';
 import AuthPage from './pages/auth';
 import AuthBackround from './components/auth-background';
+import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
+      isAuthorizing: true,
       route: parseRoute(window.location.hash)
+
     };
   }
 
@@ -22,6 +26,8 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
+
+    this.setState({ isAuthorizing: false });
   }
 
   renderPage() {
@@ -33,19 +39,25 @@ export default class App extends React.Component {
     } else if (path === 'home') {
       return <Home />;
     } else if (path === 'sign-up') {
-      return <AuthPage path = {this.state.route.path} />;
+      return <AuthPage path = { path } />;
     }
   }
 
   render() {
+    if (this.state.isAuthorizing) return null;
+    const { user } = this.state;
+    const contextValue = { user };
+
     return (
-      <>
-          <Navbar />
-          <AuthBackround />
-          <PageContainer >
-            {this.renderPage()}
-          </PageContainer>
-      </>
+      <AppContext.Provider value={contextValue}>
+        <>
+            <Navbar />
+            <AuthBackround />
+            <PageContainer >
+              {this.renderPage()}
+            </PageContainer>
+        </>
+      </AppContext.Provider>
     );
   }
 }

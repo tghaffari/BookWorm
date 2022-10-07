@@ -16,7 +16,7 @@ export default class AuthPage extends React.Component {
             <p className='auth-welcome-message'> {welcomeMessage} </p>
           </div>
         </div>
-        <div>
+        <div className='display-flex justify-content-center'>
           <AuthForm key={route} />
         </div>
       </>

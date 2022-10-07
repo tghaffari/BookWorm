@@ -435,6 +435,10 @@
   color: white;
 }
 
+.display-flex {
+  display: flex;
+}
+
 .auth-form-background {
   background-color: #ffe99b;
   width: 100%;
@@ -484,14 +488,14 @@
   color: red;
   font-size: 1.3rem;
   position: absolute;
-  top: 6rem;
+  top: 1.7rem;
 }
 
 .password-check {
   color: rgb(110, 180, 6);
   font-size: 1.3rem;
   position: absolute;
-  top: 6rem;
+  top: 1.6rem;
 }
 
 .password-reqs {
@@ -507,6 +511,7 @@
 }
 
 .auth-button {
+  font-family: Inter, sans-serif;
   color: #f8f8ee;
   background-color: #f67070;
   border: none;
@@ -690,5 +695,42 @@
 
   .placeholder-column-size {
     height: 155px;
+  }
+
+  .auth-form-background {
+    width: 32rem;
+    height: 26rem;
+  }
+
+  .auth-logo {
+    width: 70px;
+  }
+
+  .auth-title {
+    font-size: 2.6rem;
+  }
+
+  .auth-welcome-message {
+    font-size: 1.2rem;
+  }
+
+  .username-error {
+    font-size: 0.8rem;
+  }
+
+  .password-reqs {
+    font-size: 0.75rem;
+  }
+
+  .auth-form-margin-top {
+    margin-top: 1.7rem;
+  }
+
+  .auth-button {
+    padding: 0.6rem 0.7rem;
+  }
+
+  .auth-redirect-link {
+    font-size: 0.8rem;
   }
 }
