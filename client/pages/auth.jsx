@@ -1,10 +1,13 @@
 import React from 'react';
 import AuthForm from '../components/auth-form';
 import AppContext from '../lib/app-context';
+import Redirect from '../components/redirect';
 
 export default class AuthPage extends React.Component {
   render() {
-    const { route, handleSignIn } = this.context;
+    const { route, handleSignIn, user } = this.context;
+
+    if (user) return <Redirect to='home' />;
 
     const welcomeMessage = (route.path === 'sign-in')
       ? 'Please sign-in to access your library'

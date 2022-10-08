@@ -450,16 +450,18 @@
 }
 
 .auth-form-background-sign-in {
-  height: 20rem;
+  height: 15rem;
+  margin-top: 2rem;
 }
 
 .invalid-login-message {
   font-family: Inter, sans-serif;
   font-size: 0.9rem;
   color: #a50505;
-  margin: -1rem 0 0;
+  position: absolute;
   text-align: center;
-  padding-bottom: 0.4rem;
+  left: 15%;
+  top: -2rem;
 }
 
 .position-relative {
@@ -718,7 +720,7 @@
 
   .auth-form-background-sign-in {
     width: 30rem;
-    height: 22rem;
+    height: 15rem;
   }
 
   .auth-logo {

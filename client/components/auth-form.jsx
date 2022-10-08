@@ -20,14 +20,18 @@ export default class AuthForm extends React.Component {
     const { name, value } = event.target;
     this.setState({
       [name]: value,
-      validUsername: null
+      validUsername: null,
+      loginError: null
     });
   }
 
   handlePasswordInput(event) {
     const { value } = event.target;
 
-    this.setState({ password: value });
+    this.setState({
+      password: value,
+      loginError: null
+    });
 
     const lowerCaseLetters = /[a-z]/g;
     const upperCaseLetters = /[A-Z]/g;
@@ -48,6 +52,8 @@ export default class AuthForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
+    const { action } = this.props;
+
     const data = {
       username: this.state.username.toLowerCase(),
       password: this.state.password,
@@ -62,7 +68,7 @@ export default class AuthForm extends React.Component {
       body: JSON.stringify(data)
     };
 
-    if (this.state.validPassword) {
+    if (this.state.validPassword && action === 'sign-up') {
       fetch('/api/auth/sign-up', init)
         .then(res => {
           if (res.status === 409) {
@@ -74,6 +80,37 @@ export default class AuthForm extends React.Component {
               name: '',
               validPassword: false
             });
+            window.location.hash = 'sign-in';
+          }
+        })
+        .catch(err => console.error(err));
+    }
+
+    const signinData = {
+      username: this.state.username.toLowerCase(),
+      password: this.state.password
+    };
+
+    const signinInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(signinData)
+    };
+
+    if (action === 'sign-in') {
+      fetch('/api/auth/sign-in', signinInit)
+        .then(res => {
+          if (res.status === 401) {
+            this.setState({ loginError: true });
+          } else {
+            return (res.json());
+          }
+        })
+        .then(result => {
+          if (result.user && result.token) {
+            this.props.onSignIn(result);
           }
         })
         .catch(err => console.error(err));
@@ -86,10 +123,6 @@ export default class AuthForm extends React.Component {
     const formBackground = (action === 'sign-up')
       ? 'auth-form-background-sign-up'
       : 'auth-form-background-sign-in';
-
-    const nameSection = (action === 'sign-up')
-      ? 'row'
-      : 'row hidden';
 
     const redirectLink = (action === 'sign-up')
       ? (<a href='#sign-in' className='auth-redirect-link'>
@@ -117,15 +150,40 @@ export default class AuthForm extends React.Component {
       ? 'invalid-login-message'
       : 'invalid-login-message hidden';
 
-    const usernameMessage = this.state.validUsername === false
+    const usernameMessage = (this.state.validUsername === false)
       ? 'username-error'
       : 'username-error hidden';
+
+    const viewPasswordDetails = (action === 'sign-up')
+      ? 'view'
+      : 'hidden';
+
+    const nameField = (action === 'sign-up') && (
+        <div className='row'>
+          <div className='column-full'>
+            <label htmlFor='name' className='auth-form-label'>Name</label>
+            <input
+              required
+              id='name'
+              type='text'
+              name='name'
+              placeholder='Name'
+              className='auth-form-field form-margin-bottom'
+              value={this.state.name}
+              onChange={this.handleInputChange} />
+          </div>
+        </div>
+    );
 
     return (
 
       <div className={formBackground}>
         <form onSubmit={this.handleSubmit}>
-          <p className= {loginError}>Login Invalid. Please try again.</p>
+          <div className='row'>
+            <div className='column-full position-relative'>
+              <p className={ loginError } >Invalid Login. Please try again.</p>
+            </div>
+          </div>
           <div className='row'>
             <div className='column-full'>
               <label htmlFor='username' className='auth-form-label'>Username</label>
@@ -153,8 +211,8 @@ export default class AuthForm extends React.Component {
                 className='auth-form-field'
                 value={this.state.password}
                 onChange={this.handlePasswordInput} />
-              <i className={validationSymbol}></i>
-              <p className='password-reqs'>Password must contain at least:
+              <i className={`${validationSymbol} ${viewPasswordDetails}`}></i>
+              <p className={`password-reqs ${viewPasswordDetails}`}>Password must contain at least:
                 <span className='sub-reqs'>8 characters </span>
                 <span className='sub-reqs'>1 uppercase character </span>
                 <span className='sub-reqs'>1 lowercase character </span>
@@ -163,20 +221,7 @@ export default class AuthForm extends React.Component {
               </p>
             </div>
           </div>
-          <div className={nameSection}>
-            <div className='column-full'>
-              <label htmlFor='name' className='auth-form-label'>Name</label>
-              <input
-                required
-                id='name'
-                type='text'
-                name='name'
-                placeholder='Name'
-                className='auth-form-field form-margin-bottom'
-                value={this.state.name}
-                onChange={this.handleInputChange} />
-            </div>
-          </div>
+          {nameField}
           <div className='row justify-content-space-between auth-form-margin-top'>
             <div className='column-flex'>
               {redirectLink}
@@ -187,7 +232,6 @@ export default class AuthForm extends React.Component {
           </div>
         </form>
       </div>
-
     );
   }
 }
