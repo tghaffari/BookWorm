@@ -1,11 +1,14 @@
 import React from 'react';
 import AuthForm from '../components/auth-form';
+import AppContext from '../lib/app-context';
 
 export default class AuthPage extends React.Component {
   render() {
-    const route = this.props.path;
+    const { route, handleSignIn } = this.context;
 
-    const welcomeMessage = 'Join BookWorm to create your own customized library!';
+    const welcomeMessage = (route.path === 'sign-in')
+      ? 'Please sign-in to access your library'
+      : 'Join BookWorm to create your own customized library!';
 
     return (
       <>
@@ -17,10 +20,15 @@ export default class AuthPage extends React.Component {
           </div>
         </div>
         <div className='display-flex justify-content-center'>
-          <AuthForm key={route} />
+          <AuthForm
+          key={route.path}
+          action={route.path}
+          onSignIn={handleSignIn} />
         </div>
       </>
 
     );
   }
 }
+
+AuthPage.contextType = AppContext;
