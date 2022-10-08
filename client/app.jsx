@@ -15,7 +15,6 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       user: null,
-      token: null,
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
@@ -29,7 +28,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-
     window.addEventListener('hashchange', () => {
       this.setState({
         route: parseRoute(window.location.hash)
@@ -37,7 +35,7 @@ export default class App extends React.Component {
     });
     const token = window.localStorage.getItem('bookWorm-jwt');
     const user = token ? jwtDecode(token) : null;
-    this.setState({ user, isAuthorizing: false, token });
+    this.setState({ user, isAuthorizing: false });
   }
 
   renderPage() {
@@ -58,8 +56,8 @@ export default class App extends React.Component {
     if (this.state.isAuthorizing) return null;
 
     const { handleSignIn } = this;
-    const { user, route, token } = this.state;
-    const contextValue = { user, route, handleSignIn, token };
+    const { user, route } = this.state;
+    const contextValue = { user, route, handleSignIn };
 
     return (
       <AppContext.Provider value={contextValue}>

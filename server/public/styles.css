@@ -299,21 +299,6 @@
   margin-top: 20px;
 }
 
-.arrow-image-mobile {
-  width: 18rem;
-  position: fixed;
-  top: 10px;
-  left: -7rem;
-}
-
-.arrow-image-desktop {
-  width: 150px;
-  position: fixed;
-  top: 80px;
-  right: 15px;
-  display: none;
-}
-
 .my-books-list-items {
   padding-bottom: 40px;
 }

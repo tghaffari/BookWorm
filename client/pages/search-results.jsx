@@ -2,7 +2,6 @@ import React from 'react';
 import parseRoute from '../lib/parse-route';
 import BookEntryDetailsModal from '../components/book-entry-details';
 import RenderSearchResult from '../components/render-search-results';
-import AppContext from '../lib/app-context';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -59,7 +58,7 @@ export default class SearchResults extends React.Component {
   }
 
   saveBook(bookDetails) {
-    const { token } = this.context;
+    const token = window.localStorage.getItem('bookWorm-jwt');
 
     const init = {
       method: 'POST',
@@ -150,5 +149,3 @@ export default class SearchResults extends React.Component {
     );
   }
 }
-
-SearchResults.contextType = AppContext;

@@ -13,7 +13,7 @@ export default class Home extends React.Component {
   }
 
   getRecentBooks() {
-    const { token } = this.context;
+    const token = window.localStorage.getItem('bookWorm-jwt');
     const init = {
       method: 'GET',
       headers: {
@@ -43,7 +43,7 @@ export default class Home extends React.Component {
   }
 
   render() {
-    if (!this.context.user) return <Redirect to="sign-up" />;
+    if (!this.context.user) return <Redirect to="sign-in" />;
 
     if (this.state.readBooks === null && this.state.unreadBooks === null) {
       return null;
