@@ -54,22 +54,22 @@ export default class AuthForm extends React.Component {
 
     const { action } = this.props;
 
-    const data = {
+    const SignUpData = {
       username: this.state.username.toLowerCase(),
       password: this.state.password,
       name: this.state.name
     };
 
-    const init = {
+    const signUpInit = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(SignUpData)
     };
 
     if (this.state.validPassword && action === 'sign-up') {
-      fetch('/api/auth/sign-up', init)
+      fetch('/api/auth/sign-up', signUpInit)
         .then(res => {
           if (res.status === 409) {
             this.setState({ validUsername: false });
@@ -86,21 +86,21 @@ export default class AuthForm extends React.Component {
         .catch(err => console.error(err));
     }
 
-    const signinData = {
+    const signInData = {
       username: this.state.username.toLowerCase(),
       password: this.state.password
     };
 
-    const signinInit = {
+    const signInInit = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(signinData)
+      body: JSON.stringify(signInData)
     };
 
     if (action === 'sign-in') {
-      fetch('/api/auth/sign-in', signinInit)
+      fetch('/api/auth/sign-in', signInInit)
         .then(res => {
           if (res.status === 401) {
             this.setState({ loginError: true });

@@ -13,7 +13,15 @@ export default class Home extends React.Component {
   }
 
   getRecentBooks() {
-    fetch('/api/getRecentBooks')
+    const { token } = this.context;
+    const init = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': `${token}`
+      }
+    };
+    fetch('/api/getRecentBooks', init)
       .then(res => res.json())
       .then(books => {
         const readBooks = [];

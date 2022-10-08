@@ -1,12 +1,12 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       search: false,
-      searchValue: '',
-      user: null
+      searchValue: ''
     };
     this.handleSearchClick = this.handleSearchClick.bind(this);
     this.handleCancelClick = this.handleCancelClick.bind(this);
@@ -41,7 +41,8 @@ export default class Navbar extends React.Component {
   }
 
   render() {
-    if (!this.state.user) return null;
+    const { user } = this.context;
+    if (!user) return null;
 
     const bottomNav = this.state.search
       ? (
@@ -142,3 +143,5 @@ export default class Navbar extends React.Component {
     );
   }
 }
+
+Navbar.contextType = AppContext;

@@ -2,6 +2,7 @@ import React from 'react';
 import parseRoute from '../lib/parse-route';
 import BookEntryDetailsModal from '../components/book-entry-details';
 import RenderSearchResult from '../components/render-search-results';
+import AppContext from '../lib/app-context';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -58,10 +59,13 @@ export default class SearchResults extends React.Component {
   }
 
   saveBook(bookDetails) {
+    const { token } = this.context;
+
     const init = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Access-Token': `${token}`
       },
       body: JSON.stringify(bookDetails)
     };
@@ -146,3 +150,5 @@ export default class SearchResults extends React.Component {
     );
   }
 }
+
+SearchResults.contextType = AppContext;
