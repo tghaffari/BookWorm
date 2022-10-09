@@ -299,21 +299,6 @@
   margin-top: 20px;
 }
 
-.arrow-image-mobile {
-  width: 18rem;
-  position: fixed;
-  top: 10px;
-  left: -7rem;
-}
-
-.arrow-image-desktop {
-  width: 150px;
-  position: fixed;
-  top: 80px;
-  right: 15px;
-  display: none;
-}
-
 .my-books-list-items {
   padding-bottom: 40px;
 }
@@ -439,13 +424,29 @@
   display: flex;
 }
 
-.auth-form-background {
+.auth-form-background-sign-up,
+.auth-form-background-sign-in {
   background-color: #ffe99b;
   width: 100%;
   height: 25rem;
   padding: 2rem;
   border-radius: 4px;
   box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.65);
+}
+
+.auth-form-background-sign-in {
+  height: 15rem;
+  margin-top: 2rem;
+}
+
+.invalid-login-message {
+  font-family: Inter, sans-serif;
+  font-size: 0.9rem;
+  color: #a50505;
+  position: absolute;
+  text-align: center;
+  left: 15%;
+  top: -2rem;
 }
 
 .position-relative {
@@ -697,9 +698,14 @@
     height: 155px;
   }
 
-  .auth-form-background {
-    width: 32rem;
+  .auth-form-background-sign-up {
+    width: 30rem;
     height: 26rem;
+  }
+
+  .auth-form-background-sign-in {
+    width: 30rem;
+    height: 15rem;
   }
 
   .auth-logo {

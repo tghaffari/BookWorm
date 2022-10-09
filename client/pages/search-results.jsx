@@ -58,10 +58,13 @@ export default class SearchResults extends React.Component {
   }
 
   saveBook(bookDetails) {
+    const token = window.localStorage.getItem('bookWorm-jwt');
+
     const init = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Access-Token': `${token}`
       },
       body: JSON.stringify(bookDetails)
     };

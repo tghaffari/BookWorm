@@ -5,6 +5,8 @@ const errorMiddleware = require('./error-middleware');
 const ClientError = require('./client-error');
 const pg = require('pg');
 const argon2 = require('argon2');
+const authorizationMiddleware = require('./authorization-middleware');
+const jwt = require('jsonwebtoken');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -17,14 +19,78 @@ const app = express();
 
 app.use(express.json());
 app.use(staticMiddleware);
-
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
   process.stdout.write(`\n\napp listening on port ${process.env.PORT}\n\n`);
 });
 
+app.post('/api/auth/sign-up', (req, res, next) => {
+  const { username, password, name } = req.body;
+  if (!username || !password || !name) {
+    throw new ClientError(400, 'username, password, and name are required fields');
+  }
+  argon2
+    .hash(password)
+    .then(hashedPassword => {
+      const sql = `
+      insert into "users" ("username", "hashedPassword", "name")
+      values ($1, $2, $3)
+      on conflict ("username")
+      do nothing
+      returning "userId", "username", "name"
+      `;
+      const params = [username, hashedPassword, name];
+      return db.query(sql, params);
+    })
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(409, 'username exists');
+      } else {
+        res.status(201).json(user);
+      }
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/auth/sign-in', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(401, 'invalid login');
+  }
+  const sql = `
+    select "userId",
+           "hashedPassword"
+      from "users"
+     where "username" = $1
+  `;
+  const params = [username];
+  db.query(sql, params)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(401, 'invalid login');
+      }
+      const { userId, hashedPassword } = user;
+      return argon2
+        .verify(hashedPassword, password)
+        .then(isMatching => {
+          if (!isMatching) {
+            throw new ClientError(401, 'invalid login');
+          }
+          const payload = { userId, username };
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          res.json({ token, user: payload });
+        });
+    })
+    .catch(err => next(err));
+});
+
+app.use(authorizationMiddleware);
+
 app.post('/api/saveBooks', (req, res, next) => {
+  const { userId } = req.user;
   const { googleId, title, author, publishedYear, isbn, coverImgURL, completedAt = null, description = null } = req.body;
 
   if (!googleId || !title || !author || !publishedYear || !isbn || !coverImgURL) {
@@ -66,7 +132,7 @@ app.post('/api/saveBooks', (req, res, next) => {
         });
     })
     .then(bookId => {
-      const paramsLibrary = [Number(bookId), 1, completedAt];
+      const paramsLibrary = [Number(bookId), userId, completedAt];
       return db
         .query(sqlLibrary, paramsLibrary)
         .then(result => result.rows);
@@ -76,26 +142,31 @@ app.post('/api/saveBooks', (req, res, next) => {
 });
 
 app.get('/api/getAllBooks', (req, res, next) => {
+  const { userId } = req.user;
   const sql = `
   select *
   from "books"
   join "library" using ("bookId")
-  where "userId" = 1
+  where "userId" = $1
   order by "savedAt" desc
   `;
 
-  db.query(sql)
+  const params = [userId];
+
+  db.query(sql, params)
     .then(result => res.status(201).json(result.rows))
     .catch(err => next(err));
 });
 
 app.get('/api/getRecentBooks', (req, res, next) => {
+  const { userId } = req.user;
+
   const sqlRecentBooks = `
   with "read" as (
   select *
     from "books"
   join "library" using("bookId")
-  where "library"."userId" = 1 and
+  where "library"."userId" = $1 and
         "library"."completedAt" is not NULL
   order by "library"."completedAt" desc
   limit 5
@@ -103,7 +174,7 @@ app.get('/api/getRecentBooks', (req, res, next) => {
     select *
     from "books"
   join "library" using("bookId")
-  where "library"."userId" = 1 and
+  where "library"."userId" = $1 and
         "library"."completedAt" is NULL
   order by "library"."savedAt" desc
   limit 5
@@ -118,36 +189,9 @@ app.get('/api/getRecentBooks', (req, res, next) => {
   "savedAt" desc
   `;
 
-  db.query(sqlRecentBooks)
-    .then(result => res.status(201).json(result.rows))
-    .catch(err => next(err));
-});
+  const paramsRecentBooks = [userId];
 
-app.post('/api/auth/sign-up', (req, res, next) => {
-  const { username, password, name } = req.body;
-  if (!username || !password || !name) {
-    throw new ClientError(400, 'username, password, and name are required fields');
-  }
-  argon2
-    .hash(password)
-    .then(hashedPassword => {
-      const sql = `
-      insert into "users" ("username", "hashedPassword", "name")
-      values ($1, $2, $3)
-      on conflict ("username")
-      do nothing
-      returning "userId", "username", "name"
-      `;
-      const params = [username, hashedPassword, name];
-      return db.query(sql, params);
-    })
-    .then(result => {
-      const [user] = result.rows;
-      if (!user) {
-        throw new ClientError(409, 'username exists');
-      } else {
-        res.status(201).json(user);
-      }
-    })
+  db.query(sqlRecentBooks, paramsRecentBooks)
+    .then(result => res.status(201).json(result.rows))
     .catch(err => next(err));
 });

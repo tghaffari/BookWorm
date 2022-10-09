@@ -13,7 +13,15 @@ export default class Home extends React.Component {
   }
 
   getRecentBooks() {
-    fetch('/api/getRecentBooks')
+    const token = window.localStorage.getItem('bookWorm-jwt');
+    const init = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': `${token}`
+      }
+    };
+    fetch('/api/getRecentBooks', init)
       .then(res => res.json())
       .then(books => {
         const readBooks = [];
@@ -35,7 +43,7 @@ export default class Home extends React.Component {
   }
 
   render() {
-    if (!this.context.user) return <Redirect to="sign-up" />;
+    if (!this.context.user) return <Redirect to="sign-in" />;
 
     if (this.state.readBooks === null && this.state.unreadBooks === null) {
       return null;

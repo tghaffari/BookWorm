@@ -20,14 +20,23 @@ export default class MyBooks extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/getAllBooks')
+    const token = window.localStorage.getItem('bookWorm-jwt');
+    const init = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': `${token}`
+      }
+    };
+
+    fetch('/api/getAllBooks', init)
       .then(res => res.json())
       .then(books => this.setState({ myBooks: books }))
       .catch(err => console.error(err));
   }
 
   render() {
-    if (!this.context.user) return <Redirect to="sign-up" />;
+    if (!this.context.user) return <Redirect to="sign-in" />;
 
     if (this.state.myBooks === null) return null;
 
@@ -36,8 +45,6 @@ export default class MyBooks extends React.Component {
         <>
         <h1 className='my-books-heading'>My Books</h1>
           <p className='no-books-text'>No books have been saved. Click search to start your next reading adventure!</p>
-          <img src="/images/up-arrow.png" className='arrow-image-mobile'></img>
-          <img src="/images/Curved-Arrow-right.png" className='arrow-image-desktop'></img>
         </>
       );
     }
@@ -58,18 +65,18 @@ export default class MyBooks extends React.Component {
 
       return (
         <>
-        <li className='column-one-half column-full my-books-list-items' data-id={book.bookId} key={book.googleId}>
-            <div className='row jusitfy-content-center'>
-              <div className='column-flex'>
-                <img className='library-cover-img' src={book.coverImgURL} />
-              </div>
-              <div className='column-flex library-books-detail-padding'>
-                <p className='library-book-title'> {book.title}</p>
-                <p className='library-author-date'> {book.author}   &#8226;   {book.publishedYear}</p>
-                {completedDate}
-              </div>
-          </div>
-        </li>
+          <li className='column-one-half column-full my-books-list-items' data-id={book.bookId} key={book.googleId}>
+              <div className='row jusitfy-content-center'>
+                <div className='column-flex'>
+                  <img className='library-cover-img' src={book.coverImgURL} />
+                </div>
+                <div className='column-flex library-books-detail-padding'>
+                  <p className='library-book-title'> {book.title}</p>
+                  <p className='library-author-date'> {book.author}   &#8226;   {book.publishedYear}</p>
+                  {completedDate}
+                </div>
+            </div>
+          </li>
         </>
       );
     });

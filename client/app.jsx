@@ -8,6 +8,7 @@ import Home from './pages/home';
 import AuthPage from './pages/auth';
 import AuthBackround from './components/auth-background';
 import AppContext from './lib/app-context';
+import jwtDecode from 'jwt-decode';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,8 +17,14 @@ export default class App extends React.Component {
       user: null,
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
-
     };
+    this.handleSignIn = this.handleSignIn.bind(this);
+  }
+
+  handleSignIn(result) {
+    const { user, token } = result;
+    window.localStorage.setItem('bookWorm-jwt', token);
+    this.setState({ user });
   }
 
   componentDidMount() {
@@ -26,27 +33,31 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
-
-    this.setState({ isAuthorizing: false });
+    const token = window.localStorage.getItem('bookWorm-jwt');
+    const user = token ? jwtDecode(token) : null;
+    this.setState({ user, isAuthorizing: false });
   }
 
   renderPage() {
-    const { path, params } = this.state.route;
+    const { params, path } = this.state.route;
     if (path === 'search') {
       return <SearchResults params={ params}/>;
     } else if (path === 'library') {
       return <MyBooks />;
     } else if (path === 'home') {
       return <Home />;
-    } else if (path === 'sign-up') {
-      return <AuthPage path = { path } />;
+    } else if (path === 'sign-up' || path === 'sign-in') {
+      return <AuthPage />;
     }
   }
 
   render() {
+
     if (this.state.isAuthorizing) return null;
-    const { user } = this.state;
-    const contextValue = { user };
+
+    const { handleSignIn } = this;
+    const { user, route } = this.state;
+    const contextValue = { user, route, handleSignIn };
 
     return (
       <AppContext.Provider value={contextValue}>
