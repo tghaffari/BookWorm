@@ -15,8 +15,8 @@ export default class RenderSearchResult extends React.Component {
             <div className='column-flex'>
               <img className='search-image' src={src}></img>
               <div className='column-full text-align-center'>
-                <select name='addToLibrary' className='add-dropdown text-align-center' onChange={addToLibrary}>
-                  <option value='' disabled selected>ADD TO LIBRARY</option>
+                <select name='addToLibrary' className='add-dropdown text-align-center' onChange={addToLibrary} defaultValue='default'>
+                  <option value='default' disabled>ADD TO LIBRARY</option>
                   <option value='read'>READ</option>
                   <option value='to-read'>TO-READ</option>
                 </select>

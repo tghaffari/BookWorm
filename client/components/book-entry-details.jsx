@@ -42,7 +42,7 @@ export default class BookEntryDetailsModal extends React.Component {
     if (this.state.bookshelf === 'read') {
       options = (
         <>
-          <option value="read" selected >READ</option>
+          <option value="read">READ</option>
           <option value="to-read">TO-READ</option>
         </>
       );
@@ -52,7 +52,7 @@ export default class BookEntryDetailsModal extends React.Component {
       options = (
         <>
           <option value="read">READ</option>
-          <option value="to-read" selected>TO-READ</option>
+          <option value="to-read">TO-READ</option>
         </>
       );
       input = <input type="date" id="completedDate" name="completedDate" className="completed-date-deselect" disabled />;
@@ -76,7 +76,7 @@ export default class BookEntryDetailsModal extends React.Component {
             </div>
             <div className="row book-modal-padding align-items-center">
               <label id="bookshelf" className="bookshelf-label">Bookshelf:
-                <select name="bookshelf" className="bookshelf-select" onChange={this.handleBookShelfSelect}>
+                <select name="bookshelf" className="bookshelf-select" onChange={this.handleBookShelfSelect} defaultValue={this.state.bookshelf}>
                   {options}
                 </select>
               </label>

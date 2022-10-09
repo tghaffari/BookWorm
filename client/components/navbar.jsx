@@ -104,7 +104,8 @@ export default class Navbar extends React.Component {
                 <h1 className="title">BookWorm</h1>
               </div>
           </div>
-          <div className="column-one-third">
+          <div className="column-one-third text-align-end">
+            <a href="#"><i className="bi bi-box-arrow-right sign-out-icon"></i></a>
           </div>
         </nav>
         <div className="navbar bottom-shadow">
@@ -118,7 +119,6 @@ export default class Navbar extends React.Component {
                 <img className='logo' src='/images/Bookworm-logo.png'></img>
                 <h1 className="title">BookWorm</h1>
             </div>
-
           </div>
           <div className="column-flex text-align-end">
             <ul className="navigation-list align-items-end">
@@ -134,6 +134,12 @@ export default class Navbar extends React.Component {
               </li>
               <li className="nav-items-padding text-align-center">
                {desktopNav}
+              </li>
+              <li className="nav-items-padding text-align-center">
+                <a href="#sign-out">
+                  <i className="bi bi-box-arrow-right sign-out-icon"></i>
+                  <p className="nav-text">Sign-Out</p>
+                </a>
               </li>
             </ul>
           </div>

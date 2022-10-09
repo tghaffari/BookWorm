@@ -84,7 +84,8 @@
 }
 
 .home-icon,
-.book-icon {
+.book-icon,
+.sign-out-icon {
   color: #f8f8ee;
   font-size: 24px;
 }
@@ -535,6 +536,7 @@
 
 .search-icon:hover,
 .home-icon:hover,
+.sign-out-icon:hover,
 .nav-item:hover,
 .cancel-search:hover,
 .cancel-search-desktop:hover,
@@ -552,6 +554,7 @@
 
 .search-icon:hover,
 .home-icon:hover,
+.sign-out-icon:hover,
 .cancel-search:hover,
 .cancel-search-desktop:hover,
 .book-modal-exit:hover,
@@ -598,7 +601,8 @@
   }
 
   .home-icon,
-  .search-icon {
+  .search-icon,
+  .sign-out-icon {
     font-size: 24px;
   }
 
