@@ -75,8 +75,10 @@
 .nav-text {
   display: block;
   color: #f8f8ee;
-  font-size: 20px;
+  font-size: 1rem;
   margin: 0;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
 }
 
 .nav-items-padding {
@@ -84,9 +86,16 @@
 }
 
 .home-icon,
-.book-icon {
+.book-icon,
+.sign-out-icon {
   color: #f8f8ee;
   font-size: 24px;
+}
+
+.sign-out-button {
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .book-icon {
@@ -535,10 +544,11 @@
 
 .search-icon:hover,
 .home-icon:hover,
+.sign-out-icon:hover,
 .nav-item:hover,
 .cancel-search:hover,
 .cancel-search-desktop:hover,
-.nav-text,
+.nav-text:hover,
 .add-dropdown:hover,
 .book-modal-exit:hover,
 .modal-save-button:hover,
@@ -552,6 +562,7 @@
 
 .search-icon:hover,
 .home-icon:hover,
+.sign-out-icon:hover,
 .cancel-search:hover,
 .cancel-search-desktop:hover,
 .book-modal-exit:hover,
@@ -598,7 +609,8 @@
   }
 
   .home-icon,
-  .search-icon {
+  .search-icon,
+  .sign-out-icon {
     font-size: 24px;
   }
 

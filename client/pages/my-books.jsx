@@ -65,7 +65,7 @@ export default class MyBooks extends React.Component {
 
       return (
         <>
-          <li className='column-one-half column-full my-books-list-items' data-id={book.bookId} key={book.googleId}>
+          <li className='column-one-half column-full my-books-list-items' key={book.googleId} data-id={book.bookId} >
               <div className='row jusitfy-content-center'>
                 <div className='column-flex'>
                   <img className='library-cover-img' src={book.coverImgURL} />

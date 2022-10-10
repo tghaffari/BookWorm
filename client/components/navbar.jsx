@@ -41,7 +41,7 @@ export default class Navbar extends React.Component {
   }
 
   render() {
-    const { user } = this.context;
+    const { user, handleSignOut } = this.context;
     if (!user) return null;
 
     const bottomNav = this.state.search
@@ -104,7 +104,8 @@ export default class Navbar extends React.Component {
                 <h1 className="title">BookWorm</h1>
               </div>
           </div>
-          <div className="column-one-third">
+          <div className="column-one-third text-align-end">
+            <button type='button' className='sign-out-button'><i className="bi bi-box-arrow-right sign-out-icon" onClick={handleSignOut}></i></button>
           </div>
         </nav>
         <div className="navbar bottom-shadow">
@@ -118,7 +119,6 @@ export default class Navbar extends React.Component {
                 <img className='logo' src='/images/Bookworm-logo.png'></img>
                 <h1 className="title">BookWorm</h1>
             </div>
-
           </div>
           <div className="column-flex text-align-end">
             <ul className="navigation-list align-items-end">
@@ -134,6 +134,12 @@ export default class Navbar extends React.Component {
               </li>
               <li className="nav-items-padding text-align-center">
                {desktopNav}
+              </li>
+              <li className="nav-items-padding text-align-center">
+                <button onClick={handleSignOut} type='button' className='sign-out-button'>
+                  <i className="bi bi-box-arrow-right sign-out-icon"></i>
+                  <p className="nav-text">Sign-Out</p>
+                </button>
               </li>
             </ul>
           </div>
