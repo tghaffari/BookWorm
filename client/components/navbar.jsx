@@ -105,7 +105,7 @@ export default class Navbar extends React.Component {
               </div>
           </div>
           <div className="column-one-third text-align-end">
-            <a><i className="bi bi-box-arrow-right sign-out-icon" onClick={handleSignOut}></i></a>
+            <button type='button' className='sign-out-button'><i className="bi bi-box-arrow-right sign-out-icon" onClick={handleSignOut}></i></button>
           </div>
         </nav>
         <div className="navbar bottom-shadow">
@@ -136,10 +136,10 @@ export default class Navbar extends React.Component {
                {desktopNav}
               </li>
               <li className="nav-items-padding text-align-center">
-                  <a onClick={handleSignOut}>
+                <button onClick={handleSignOut} type='button' className='sign-out-button'>
                   <i className="bi bi-box-arrow-right sign-out-icon"></i>
                   <p className="nav-text">Sign-Out</p>
-                </a>
+                </button>
               </li>
             </ul>
           </div>
