@@ -130,9 +130,8 @@
 }
 
 .desktop-search-bar {
-  width: 170px;
+  width: 140px;
   height: 30px;
-  margin-right: 10px;
   border-radius: 4px;
   border: solid #ced4da;
   margin-bottom: 10px;
@@ -356,6 +355,7 @@
   color: #783b03;
   font-weight: normal;
   margin: 40px 0 0;
+  display: inline-block;
 }
 
 .read-shelf,
@@ -560,6 +560,7 @@
   cursor: pointer;
 }
 
+.nav-items-padding:hover,
 .search-icon:hover,
 .home-icon:hover,
 .sign-out-icon:hover,
@@ -568,6 +569,12 @@
 .book-modal-exit:hover,
 .book-icon:hover {
   color: #783b03;
+  transition: 1s;
+}
+
+.home-read-shelf-title:hover,
+.home-to-read-shelf-title:hover {
+  color: #f7963c;
   transition: 1s;
 }
 
@@ -612,10 +619,6 @@
   .search-icon,
   .sign-out-icon {
     font-size: 24px;
-  }
-
-  .desktop-search-bar {
-    margin-right: 0;
   }
 
   .cancel-search {
@@ -750,5 +753,11 @@
 
   .auth-redirect-link {
     font-size: 0.8rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .desktop-search-bar {
+    width: 150px;
   }
 }

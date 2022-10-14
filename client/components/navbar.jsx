@@ -123,14 +123,16 @@ export default class Navbar extends React.Component {
           <div className="column-flex text-align-end">
             <ul className="navigation-list align-items-end">
               <li className="nav-items-padding text-align-center">
-                <a href="#home">
-                  <i className="fa-solid fa-house home-icon"></i>
+                <a href='#home'>
+                  <i className="fa-solid fa-house home-icon home-link"></i>
                   <p className="nav-text">Home</p>
                 </a>
               </li >
               <li className='nav-items-padding text-align-center'>
-                <a href="#library"><i className="fa-solid fa-book book-icon"></i></a>
-                <p className='nav-text'>Library</p>
+                <a href="#library">
+                  <i className="fa-solid fa-book book-icon"></i>
+                  <p className='nav-text'>Library</p>
+                </a>
               </li>
               <li className="nav-items-padding text-align-center">
                {desktopNav}

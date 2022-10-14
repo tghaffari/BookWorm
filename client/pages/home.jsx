@@ -62,7 +62,7 @@ export default class Home extends React.Component {
     } else {
       readBookCovers = this.state.readBooks.map(book => {
         return (
-          <li className='column-flex cover-li' key={book.googlId}>
+          <li className='column-flex cover-li' key={book.title}>
             <img className='home-cover-img' src={book.coverImgURL} />
           </li>
         );
