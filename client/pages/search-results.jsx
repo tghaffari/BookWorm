@@ -2,6 +2,7 @@ import React from 'react';
 import parseRoute from '../lib/parse-route';
 import BookEntryDetailsModal from '../components/book-entry-details';
 import RenderSearchResult from '../components/render-search-results';
+import LoadingSpinner from '../components/loading-spinner';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ export default class SearchResults extends React.Component {
   }
 
   fetchSearchResults() {
+    this.setState({ isLoading: true });
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.props.params.toString()}&maxResults=20&key=${process.env.API_KEY}`)
       .then(res => res.json())
       .then(data => {
@@ -123,14 +125,13 @@ export default class SearchResults extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return null;
-
     const searchResults = this.state.results.map((results, index) => {
       return <RenderSearchResult results={results} addToLibrary = {this.handleAddToLibrary} key={results.id}/>;
     });
 
     return (
       <>
+        <LoadingSpinner isLoading={this.state.isLoading} />
         <h1 className='search-heading'>Search</h1>
         <form onSubmit={this.handleSubmit}>
           <input

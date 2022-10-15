@@ -86,7 +86,7 @@ export default class Navbar extends React.Component {
         </form>
         )
       : (
-        <a onClick={this.handleSearchClick} className='desktop-search-navbar-button'>
+        <a onClick={this.handleSearchClick} className='desktop-search-navbar-button nav-link'>
           <i className="bi bi-search search-icon"></i>
           <p className="nav-text">Search</p>
         </a>
@@ -123,13 +123,13 @@ export default class Navbar extends React.Component {
           <div className="column-flex text-align-end">
             <ul className="navigation-list align-items-end">
               <li className="nav-items-padding text-align-center">
-                <a href='#home'>
-                  <i className="fa-solid fa-house home-icon home-link"></i>
+                <a className="nav-link" href='#home'>
+                  <i className="fa-solid fa-house home-icon"></i>
                   <p className="nav-text">Home</p>
                 </a>
               </li >
               <li className='nav-items-padding text-align-center'>
-                <a href="#library">
+                <a className="nav-link" href="#library">
                   <i className="fa-solid fa-book book-icon"></i>
                   <p className='nav-text'>Library</p>
                 </a>
@@ -138,7 +138,7 @@ export default class Navbar extends React.Component {
                {desktopNav}
               </li>
               <li className="nav-items-padding text-align-center">
-                <button onClick={handleSignOut} type='button' className='sign-out-button'>
+                <button onClick={handleSignOut} type='button' className='sign-out-button nav-link'>
                   <i className="bi bi-box-arrow-right sign-out-icon"></i>
                   <p className="nav-text">Sign-Out</p>
                 </button>

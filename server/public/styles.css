@@ -560,7 +560,7 @@
   cursor: pointer;
 }
 
-.nav-items-padding:hover,
+.nav-link:hover *,
 .search-icon:hover,
 .home-icon:hover,
 .sign-out-icon:hover,
@@ -591,6 +591,38 @@
 .auth-form-field:focus {
   outline: none;
   border-color: #f67070;
+}
+
+@keyframes grow-and-shrink {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.loading-spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 30%;
+  animation: grow-and-shrink 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.loading-spinner-background {
+  color: #5a2f04;
+}
+
+.loading-spinner {
+  font-size: 6rem;
+  color: #eedbdb;
 }
 
 @media screen and (min-width: 768px) {
@@ -753,6 +785,16 @@
 
   .auth-redirect-link {
     font-size: 0.8rem;
+  }
+
+  @keyframes grow-and-shrink {
+    50% {
+      transform: scale(2);
+    }
+  }
+
+  .loading-spinner-container {
+    left: 50%;
   }
 }
 
