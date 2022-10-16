@@ -185,6 +185,12 @@
   padding-top: 10px;
 }
 
+.no-books-search {
+  font-family: Inter, sans-serif;
+  color: #783b03;
+  font-size: 0.9rem;
+}
+
 .add-dropdown {
   font-family: Inter, sans-serif;
   font-size: 12px;
@@ -660,6 +666,10 @@
   .search-bar {
     width: 90%;
     height: 35px;
+  }
+
+  .no-books-search {
+    font-size: 1rem;
   }
 
   .book-details-modal-window {

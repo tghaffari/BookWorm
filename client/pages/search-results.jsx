@@ -23,7 +23,10 @@ export default class SearchResults extends React.Component {
   }
 
   handleInputChange(event) {
-    this.setState({ searchValue: event.target.value });
+    this.setState({
+      searchValue: event.target.value,
+      results: []
+    });
   }
 
   formatSearchResults() {
@@ -47,7 +50,7 @@ export default class SearchResults extends React.Component {
         if (data.totalItems === 0) {
           this.setState({
             isLoading: false,
-            results: 'Sorry, no results were found. Please try again...'
+            results: null
           });
         } else {
           this.setState({
@@ -125,9 +128,11 @@ export default class SearchResults extends React.Component {
   }
 
   render() {
-    const searchResults = this.state.results.map((results, index) => {
-      return <RenderSearchResult results={results} addToLibrary = {this.handleAddToLibrary} key={results.id}/>;
-    });
+    const searchResults = (this.state.results === null)
+      ? <p className='no-books-search'>Sorry, no results were found. Please try again.</p>
+      : this.state.results.map((results, index) => {
+        return <RenderSearchResult results={results} addToLibrary = {this.handleAddToLibrary} key={results.id}/>;
+      });
 
     return (
       <>
