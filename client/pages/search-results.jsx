@@ -23,10 +23,7 @@ export default class SearchResults extends React.Component {
   }
 
   handleInputChange(event) {
-    this.setState({
-      searchValue: event.target.value,
-      results: []
-    });
+    this.setState({ searchValue: event.target.value });
   }
 
   formatSearchResults() {
@@ -124,6 +121,9 @@ export default class SearchResults extends React.Component {
 
     if (prevParams !== currentParams) {
       this.fetchSearchResults();
+      this.setState({
+        searchValue: this.formatSearchResults()
+      });
     }
   }
 
