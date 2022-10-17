@@ -211,7 +211,6 @@ export default class AuthForm extends React.Component {
     );
 
     return (
-
       <div className={formBackground}>
         <form onSubmit={this.handleSubmit}>
           <div className='row'>

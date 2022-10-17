@@ -58,7 +58,7 @@ export default class Home extends React.Component {
     if (this.state.readBooks.length === 0) {
       readBookCovers = (
         <li className='column-full text-align-center placeholder-column-size' key='1'>
-          <img className='placeholder-books' src='/images/placeholder_books.png'></img>
+          <img className='placeholder-books' src='/images/placeholder_books.webp'></img>
           <p className='home-placeholder-text'>Click Search to start adding books to your bookshelf!</p>
         </li>
       );
@@ -75,7 +75,7 @@ export default class Home extends React.Component {
     if (this.state.unreadBooks.length === 0) {
       unreadBookCovers = (
         <li className='column-full text-align-center placeholder-column-size' key='1'>
-          <img className='placeholder-books' src='/images/placeholder_books.png'></img>
+          <img className='placeholder-books' src='/images/placeholder_books.webp'></img>
           <p className='home-placeholder-text'>Click Search to start adding books to your bookshelf!</p>
         </li>
       );
@@ -103,7 +103,7 @@ export default class Home extends React.Component {
             </ul>
             <div className='row text-align-center'>
               <div className='column-full'>
-                <img src='/images/shelf.png' className='read-shelf'></img>
+                <img src='/images/shelf.webp' className='read-shelf'></img>
               </div>
             </div>
           </div>
@@ -120,7 +120,7 @@ export default class Home extends React.Component {
             </ul>
             <div className='row text-align-center'>
               <div className='column-full'>
-                <img src='/images/shelf.png' className='to-read-shelf'></img>
+                <img src='/images/shelf.webp' className='to-read-shelf'></img>
               </div>
             </div>
           </div>

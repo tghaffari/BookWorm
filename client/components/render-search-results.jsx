@@ -6,7 +6,7 @@ export default class RenderSearchResult extends React.Component {
 
     const author = results.volumeInfo.authors?.join(', ') ?? '';
     const publishedYear = results.volumeInfo.publishedDate?.slice(0, 4) ?? '';
-    const src = results.volumeInfo.imageLinks?.thumbnail ?? '/images/no_book_cover.jpeg';
+    const src = results.volumeInfo.imageLinks?.thumbnail ?? '/images/no_book_cover.webp';
 
     return (
       <li key={results.id} className="search-list-element" data-id={results.id}>
