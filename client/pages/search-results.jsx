@@ -1,7 +1,7 @@
 import React from 'react';
 import parseRoute from '../lib/parse-route';
 import BookEntryDetailsModal from '../components/book-entry-details';
-import RenderSearchResult from '../components/render-search-results';
+import RenderSearchResults from '../components/render-search-results';
 import LoadingSpinner from '../components/loading-spinner';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
@@ -144,7 +144,7 @@ export default class SearchResults extends React.Component {
     const searchResults = (this.state.results === null)
       ? <p className='no-books-search'>Sorry, no results were found. Please try again.</p>
       : this.state.results.map((results, index) => {
-        return <RenderSearchResult results={results} addToLibrary = {this.handleAddToLibrary} key={results.id}/>;
+        return <RenderSearchResults results={results} addToLibrary = {this.handleAddToLibrary} key={results.id}/>;
       });
 
     return (

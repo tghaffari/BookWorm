@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class RenderSearchResult extends React.Component {
+export default class RenderSearchResults extends React.Component {
   render() {
     const { results, addToLibrary } = this.props;
 

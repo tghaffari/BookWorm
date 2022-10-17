@@ -9,6 +9,7 @@ import AuthPage from './pages/auth';
 import AuthBackround from './components/auth-background';
 import AppContext from './lib/app-context';
 import jwtDecode from 'jwt-decode';
+import Redirect from './components/redirect';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -55,7 +56,7 @@ export default class App extends React.Component {
     } else if (path === 'sign-up' || path === 'sign-in') {
       return <AuthPage />;
     } else if (path === '') {
-      return <AuthPage />;
+      return <Redirect to='sign-in' />;
     }
   }
 

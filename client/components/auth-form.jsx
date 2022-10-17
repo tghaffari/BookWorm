@@ -125,6 +125,7 @@ export default class AuthForm extends React.Component {
   }
 
   handleGuestLogin() {
+
     const guestSignInData = {
       username: process.env.GUEST_USERNAME,
       password: process.env.GUEST_PASSWORD
@@ -145,7 +146,6 @@ export default class AuthForm extends React.Component {
         console.error(err);
         window.alert('We are unable to process your request at this time. Please check your internet connection and try again later.');
       });
-
   }
 
   render() {
