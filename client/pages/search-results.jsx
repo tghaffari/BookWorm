@@ -1,7 +1,11 @@
 import React from 'react';
 import parseRoute from '../lib/parse-route';
 import BookEntryDetailsModal from '../components/book-entry-details';
-import RenderSearchResult from '../components/render-search-results';
+import RenderSearchResults from '../components/render-search-results';
+import LoadingSpinner from '../components/loading-spinner';
+import Redirect from '../components/redirect';
+import AppContext from '../lib/app-context';
+import handleFetchRejection from '../lib/handle-fetch-rejection';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -39,13 +43,14 @@ export default class SearchResults extends React.Component {
   }
 
   fetchSearchResults() {
+    this.setState({ isLoading: true });
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.props.params.toString()}&maxResults=20&key=${process.env.API_KEY}`)
       .then(res => res.json())
       .then(data => {
         if (data.totalItems === 0) {
           this.setState({
             isLoading: false,
-            results: 'Sorry, no results were found. Please try again...'
+            results: null
           });
         } else {
           this.setState({
@@ -54,7 +59,11 @@ export default class SearchResults extends React.Component {
           });
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        window.alert('Sorry, there was a problem connecting to the network! Please check your internet connection and try again later.');
+      }
+      );
   }
 
   saveBook(bookDetails) {
@@ -70,7 +79,7 @@ export default class SearchResults extends React.Component {
     };
 
     fetch('/api/saveBooks', init)
-      .catch(err => console.error(err));
+      .catch(handleFetchRejection);
   }
 
   handleAddToLibrary(event) {
@@ -112,6 +121,8 @@ export default class SearchResults extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (!this.context.user) return <Redirect to="sign-in" />;
+
     const currentURL = new URL(window.location);
     const parsedURL = parseRoute(currentURL.hash);
     const currentParams = parsedURL.params.toString();
@@ -119,18 +130,24 @@ export default class SearchResults extends React.Component {
 
     if (prevParams !== currentParams) {
       this.fetchSearchResults();
+      this.setState({
+        searchValue: this.formatSearchResults()
+      });
     }
   }
 
   render() {
-    if (this.state.isLoading) return null;
+    if (!this.context.user) return <Redirect to="sign-in" />;
 
-    const searchResults = this.state.results.map((results, index) => {
-      return <RenderSearchResult results={results} addToLibrary = {this.handleAddToLibrary} key={results.id}/>;
-    });
+    const searchResults = (this.state.results === null)
+      ? <p className='no-books-search'>Sorry, no results were found. Please try again.</p>
+      : this.state.results.map((results, index) => {
+        return <RenderSearchResults results={results} addToLibrary = {this.handleAddToLibrary} key={results.id}/>;
+      });
 
     return (
       <>
+        <LoadingSpinner isLoading={this.state.isLoading} />
         <h1 className='search-heading'>Search</h1>
         <form onSubmit={this.handleSubmit}>
           <input
@@ -149,3 +166,5 @@ export default class SearchResults extends React.Component {
     );
   }
 }
+
+SearchResults.contextType = AppContext;

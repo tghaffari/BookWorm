@@ -17,7 +17,7 @@ export default class AuthPage extends React.Component {
       <>
         <div className='row auth-top-padding'>
           <div className='column-full text-align-center'>
-            <img className='auth-logo' src='/images/Bookworm-logo.png'></img>
+            <img className='auth-logo' src='/images/Bookworm-logo.webp'></img>
             <h1 className='auth-title'>BookWorm</h1>
             <p className='auth-welcome-message'> {welcomeMessage} </p>
           </div>

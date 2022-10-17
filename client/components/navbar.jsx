@@ -86,7 +86,7 @@ export default class Navbar extends React.Component {
         </form>
         )
       : (
-        <a onClick={this.handleSearchClick} className='desktop-search-navbar-button'>
+        <a onClick={this.handleSearchClick} className='desktop-search-navbar-button nav-link'>
           <i className="bi bi-search search-icon"></i>
           <p className="nav-text">Search</p>
         </a>
@@ -100,7 +100,7 @@ export default class Navbar extends React.Component {
           </div>
           <div className="column-one-third text-align-center">
               <div className='row align-items-center'>
-                <img className='logo' src='/images/Bookworm-logo.png'></img>
+                <img className='logo' src='/images/Bookworm-logo.webp'></img>
                 <h1 className="title">BookWorm</h1>
               </div>
           </div>
@@ -116,27 +116,29 @@ export default class Navbar extends React.Component {
         <nav className="navbar row align-items-center box-shadow justify-content-space-between">
           <div className="flex">
             <div className='row align-items-center'>
-                <img className='logo' src='/images/Bookworm-logo.png'></img>
+                <img className='logo' src='/images/Bookworm-logo.webp'></img>
                 <h1 className="title">BookWorm</h1>
             </div>
           </div>
           <div className="column-flex text-align-end">
             <ul className="navigation-list align-items-end">
               <li className="nav-items-padding text-align-center">
-                <a href="#home">
+                <a className="nav-link" href='#home'>
                   <i className="fa-solid fa-house home-icon"></i>
                   <p className="nav-text">Home</p>
                 </a>
               </li >
               <li className='nav-items-padding text-align-center'>
-                <a href="#library"><i className="fa-solid fa-book book-icon"></i></a>
-                <p className='nav-text'>Library</p>
+                <a className="nav-link" href="#library">
+                  <i className="fa-solid fa-book book-icon"></i>
+                  <p className='nav-text'>Library</p>
+                </a>
               </li>
               <li className="nav-items-padding text-align-center">
                {desktopNav}
               </li>
               <li className="nav-items-padding text-align-center">
-                <button onClick={handleSignOut} type='button' className='sign-out-button'>
+                <button onClick={handleSignOut} type='button' className='sign-out-button nav-link'>
                   <i className="bi bi-box-arrow-right sign-out-icon"></i>
                   <p className="nav-text">Sign-Out</p>
                 </button>

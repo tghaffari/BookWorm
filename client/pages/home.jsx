@@ -35,7 +35,10 @@ export default class Home extends React.Component {
         });
         this.setState({ readBooks, unreadBooks });
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        if (this.context.user) window.alert('Sorry, we are unable to retrieve your books at this time. Please check your internet connection and try again later.');
+      });
   }
 
   componentDidMount() {
@@ -55,14 +58,14 @@ export default class Home extends React.Component {
     if (this.state.readBooks.length === 0) {
       readBookCovers = (
         <li className='column-full text-align-center placeholder-column-size' key='1'>
-          <img className='placeholder-books' src='/images/placeholder_books.png'></img>
+          <img className='placeholder-books' src='/images/placeholder_books.webp'></img>
           <p className='home-placeholder-text'>Click Search to start adding books to your bookshelf!</p>
         </li>
       );
     } else {
       readBookCovers = this.state.readBooks.map(book => {
         return (
-          <li className='column-flex cover-li' key={book.googlId}>
+          <li className='column-flex cover-li' key={book.title}>
             <img className='home-cover-img' src={book.coverImgURL} />
           </li>
         );
@@ -72,14 +75,14 @@ export default class Home extends React.Component {
     if (this.state.unreadBooks.length === 0) {
       unreadBookCovers = (
         <li className='column-full text-align-center placeholder-column-size' key='1'>
-          <img className='placeholder-books' src='/images/placeholder_books.png'></img>
+          <img className='placeholder-books' src='/images/placeholder_books.webp'></img>
           <p className='home-placeholder-text'>Click Search to start adding books to your bookshelf!</p>
         </li>
       );
     } else {
       unreadBookCovers = this.state.unreadBooks.map(book => {
         return (
-          <li className='column-flex cover-li' key={book.googlId}>
+          <li className='column-flex cover-li' key={book.coverImgURL}>
             <img className='home-cover-img' src={book.coverImgURL} />
           </li>
         );
@@ -100,7 +103,7 @@ export default class Home extends React.Component {
             </ul>
             <div className='row text-align-center'>
               <div className='column-full'>
-                <img src='/images/shelf.png' className='read-shelf'></img>
+                <img src='/images/shelf.webp' className='read-shelf'></img>
               </div>
             </div>
           </div>
@@ -117,7 +120,7 @@ export default class Home extends React.Component {
             </ul>
             <div className='row text-align-center'>
               <div className='column-full'>
-                <img src='/images/shelf.png' className='to-read-shelf'></img>
+                <img src='/images/shelf.webp' className='to-read-shelf'></img>
               </div>
             </div>
           </div>
