@@ -56,7 +56,11 @@ export default class SearchResults extends React.Component {
           });
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        window.alert('Sorry, there was a problem connecting to the network! Please check your internet connection and try again later.');
+      }
+      );
   }
 
   saveBook(bookDetails) {
@@ -72,7 +76,10 @@ export default class SearchResults extends React.Component {
     };
 
     fetch('/api/saveBooks', init)
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        window.alert('Sorry, we were unable to process your request at this time. Please try again later.');
+      });
   }
 
   handleAddToLibrary(event) {

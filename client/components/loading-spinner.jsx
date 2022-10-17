@@ -11,7 +11,6 @@ export default class LoadingSpinner extends React.Component {
         <i className="fa-solid fa-book-open fa-stack-2x loading-spinner-background"></i>
         <i className="fa-solid fa-book-open fa-stack-1x loading-spinner"></i>
       </div>
-
     );
   }
 

@@ -35,7 +35,10 @@ export default class Home extends React.Component {
         });
         this.setState({ readBooks, unreadBooks });
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        window.alert('Sorry, we are unable to retrieve your books at this time. Please check your internet connection and try again later.');
+      });
   }
 
   componentDidMount() {
