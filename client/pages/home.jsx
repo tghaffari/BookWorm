@@ -37,7 +37,7 @@ export default class Home extends React.Component {
       })
       .catch(err => {
         console.error(err);
-        window.alert('Sorry, we are unable to retrieve your books at this time. Please check your internet connection and try again later.');
+        if (this.context.user) window.alert('Sorry, we are unable to retrieve your books at this time. Please check your internet connection and try again later.');
       });
   }
 
@@ -82,7 +82,7 @@ export default class Home extends React.Component {
     } else {
       unreadBookCovers = this.state.unreadBooks.map(book => {
         return (
-          <li className='column-flex cover-li' key={book.title}>
+          <li className='column-flex cover-li' key={book.coverImgURL}>
             <img className='home-cover-img' src={book.coverImgURL} />
           </li>
         );

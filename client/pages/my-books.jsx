@@ -34,7 +34,7 @@ export default class MyBooks extends React.Component {
       .then(books => this.setState({ myBooks: books }))
       .catch(err => {
         console.error(err);
-        window.alert('Sorry, we are unable to retrieve your books at this time. Please check your internet connection and try again later.');
+        if (this.context.user) window.alert('Sorry, we are unable to retrieve your books at this time. Please check your internet connection and try again later.');
       });
   }
 

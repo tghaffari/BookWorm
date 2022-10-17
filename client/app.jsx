@@ -47,7 +47,7 @@ export default class App extends React.Component {
   renderPage() {
     const { params, path } = this.state.route;
     if (path === 'search') {
-      return <SearchResults params={ params}/>;
+      return <SearchResults params={params} path={path}/>;
     } else if (path === 'library') {
       return <MyBooks />;
     } else if (path === 'home') {

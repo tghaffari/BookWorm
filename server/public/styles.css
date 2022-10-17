@@ -450,7 +450,7 @@
 }
 
 .auth-form-background-sign-in {
-  height: 15rem;
+  height: 16rem;
   margin-top: 2rem;
 }
 
@@ -526,6 +526,15 @@
   padding-left: 0.7rem;
 }
 
+.guest-link {
+  font-family: Inter, sans-serif;
+  color: #783b03;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 1rem 0 0;
+}
+
 .auth-button {
   font-family: Inter, sans-serif;
   color: #f8f8ee;
@@ -562,7 +571,8 @@
 .completed-date:hover,
 .home-read-shelf-title,
 .home-to-read-shelf-title,
-.auth-button:hover {
+.auth-button:hover,
+.guest-link:hover {
   cursor: pointer;
 }
 
@@ -762,7 +772,7 @@
 
   .auth-form-background-sign-in {
     width: 30rem;
-    height: 15rem;
+    height: 17rem;
   }
 
   .auth-logo {

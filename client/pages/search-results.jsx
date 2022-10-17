@@ -3,6 +3,8 @@ import parseRoute from '../lib/parse-route';
 import BookEntryDetailsModal from '../components/book-entry-details';
 import RenderSearchResult from '../components/render-search-results';
 import LoadingSpinner from '../components/loading-spinner';
+import Redirect from '../components/redirect';
+import AppContext from '../lib/app-context';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -121,6 +123,8 @@ export default class SearchResults extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (!this.context.user) return <Redirect to="sign-in" />;
+
     const currentURL = new URL(window.location);
     const parsedURL = parseRoute(currentURL.hash);
     const currentParams = parsedURL.params.toString();
@@ -135,6 +139,8 @@ export default class SearchResults extends React.Component {
   }
 
   render() {
+    if (!this.context.user) return <Redirect to="sign-in" />;
+
     const searchResults = (this.state.results === null)
       ? <p className='no-books-search'>Sorry, no results were found. Please try again.</p>
       : this.state.results.map((results, index) => {
@@ -162,3 +168,5 @@ export default class SearchResults extends React.Component {
     );
   }
 }
+
+SearchResults.contextType = AppContext;

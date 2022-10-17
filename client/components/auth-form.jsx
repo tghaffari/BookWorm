@@ -14,6 +14,7 @@ export default class AuthForm extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleGuestLogin = this.handleGuestLogin.bind(this);
   }
 
   handleInputChange(event) {
@@ -83,7 +84,10 @@ export default class AuthForm extends React.Component {
             window.location.hash = 'sign-in';
           }
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+          console.error(err);
+          window.alert('We are unable to process your request at this time. Please check your internet connection and try again later.');
+        });
     }
 
     const signInData = {
@@ -113,8 +117,35 @@ export default class AuthForm extends React.Component {
             this.props.onSignIn(result);
           }
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+          console.error(err);
+          window.alert('We are unable to process your request at this time. Please check your internet connection and try again later.');
+        });
     }
+  }
+
+  handleGuestLogin() {
+    const guestSignInData = {
+      username: process.env.GUEST_USERNAME,
+      password: process.env.GUEST_PASSWORD
+    };
+
+    const guestSignInInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(guestSignInData)
+    };
+
+    fetch('/api/auth/sign-in', guestSignInInit)
+      .then(res => res.json())
+      .then(result => this.props.onSignIn(result))
+      .catch(err => {
+        console.error(err);
+        window.alert('We are unable to process your request at this time. Please check your internet connection and try again later.');
+      });
+
   }
 
   render() {
@@ -155,6 +186,10 @@ export default class AuthForm extends React.Component {
       : 'username-error hidden';
 
     const viewPasswordDetails = (action === 'sign-up')
+      ? 'view'
+      : 'hidden';
+
+    const guestLinkView = (action === 'sign-in')
       ? 'view'
       : 'hidden';
 
@@ -222,6 +257,11 @@ export default class AuthForm extends React.Component {
             </div>
           </div>
           {nameField}
+          <div className='row'>
+            <div className='column-full text-align-center'>
+              <p className={`guest-link ${guestLinkView}`} onClick={this.handleGuestLogin}>Continue as Guest</p>
+            </div>
+          </div>
           <div className='row justify-content-space-between auth-form-margin-top'>
             <div className='column-flex'>
               {redirectLink}
