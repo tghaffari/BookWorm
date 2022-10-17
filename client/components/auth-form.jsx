@@ -1,4 +1,5 @@
 import React from 'react';
+import handleFetchRejection from '../lib/handle-fetch-rejection.js';
 
 export default class AuthForm extends React.Component {
   constructor(props) {
@@ -84,10 +85,7 @@ export default class AuthForm extends React.Component {
             window.location.hash = 'sign-in';
           }
         })
-        .catch(err => {
-          console.error(err);
-          window.alert('We are unable to process your request at this time. Please check your internet connection and try again later.');
-        });
+        .catch(handleFetchRejection);
     }
 
     const signInData = {
@@ -117,10 +115,7 @@ export default class AuthForm extends React.Component {
             this.props.onSignIn(result);
           }
         })
-        .catch(err => {
-          console.error(err);
-          window.alert('We are unable to process your request at this time. Please check your internet connection and try again later.');
-        });
+        .catch(handleFetchRejection);
     }
   }
 
@@ -142,10 +137,7 @@ export default class AuthForm extends React.Component {
     fetch('/api/auth/sign-in', guestSignInInit)
       .then(res => res.json())
       .then(result => this.props.onSignIn(result))
-      .catch(err => {
-        console.error(err);
-        window.alert('We are unable to process your request at this time. Please check your internet connection and try again later.');
-      });
+      .catch(handleFetchRejection);
   }
 
   render() {

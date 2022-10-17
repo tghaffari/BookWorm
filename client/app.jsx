@@ -9,7 +9,6 @@ import AuthPage from './pages/auth';
 import AuthBackround from './components/auth-background';
 import AppContext from './lib/app-context';
 import jwtDecode from 'jwt-decode';
-import Redirect from './components/redirect';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -51,12 +50,10 @@ export default class App extends React.Component {
       return <SearchResults params={params} path={path}/>;
     } else if (path === 'library') {
       return <MyBooks />;
-    } else if (path === 'home') {
+    } else if (path === 'home' || path === '') {
       return <Home />;
     } else if (path === 'sign-up' || path === 'sign-in') {
       return <AuthPage />;
-    } else if (path === '') {
-      return <Redirect to='sign-in' />;
     }
   }
 

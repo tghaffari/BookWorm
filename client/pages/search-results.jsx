@@ -5,6 +5,7 @@ import RenderSearchResults from '../components/render-search-results';
 import LoadingSpinner from '../components/loading-spinner';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
+import handleFetchRejection from '../lib/handle-fetch-rejection';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -78,10 +79,7 @@ export default class SearchResults extends React.Component {
     };
 
     fetch('/api/saveBooks', init)
-      .catch(err => {
-        console.error(err);
-        window.alert('Sorry, we were unable to process your request at this time. Please try again later.');
-      });
+      .catch(handleFetchRejection);
   }
 
   handleAddToLibrary(event) {
