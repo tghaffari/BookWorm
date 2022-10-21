@@ -2,6 +2,8 @@
   background-color: #f2e7e2;
 }
 
+/* Reusable classes */
+
 .justify-content-center {
   justify-content: center;
 }
@@ -38,6 +40,8 @@
   flex-wrap: wrap;
 }
 
+/* Navbar  */
+
 .box-shadow {
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
 }
@@ -53,7 +57,7 @@
 .navbar {
   background-color: #f67070;
   height: 50px;
-  padding: 0 25px;
+  padding: 0 1.56rem;
 }
 
 .bottom-shadow {
@@ -63,13 +67,13 @@
 .title {
   font-family: Dosis, sans-serif;
   color: #f8f8ee;
-  font-size: 26px;
+  font-size: 1.63rem;
   font-weight: 500;
 }
 
 .search-icon {
   color: #f8f8ee;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .nav-text {
@@ -82,14 +86,14 @@
 }
 
 .nav-items-padding {
-  padding-left: 25px;
+  padding-left: 1.56rem;
 }
 
 .home-icon,
 .book-icon,
 .sign-out-icon {
   color: #f8f8ee;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .sign-out-button {
@@ -99,13 +103,13 @@
 }
 
 .book-icon {
-  font-size: 26px;
+  font-size: 1.63rem;
 }
 
 .mobile-search-bar {
-  width: 250px;
+  width: 70%;
   height: 25px;
-  margin-right: 10px;
+  margin-right: 0.625rem;
   border-radius: 4px;
   border: solid #ced4da;
 }
@@ -126,26 +130,28 @@
   text-align: center;
   font-family: Inter, sans-serif;
   color: #f8f8ee;
-  margin-left: 5px;
+  margin-left: 0.31rem;
 }
 
 .desktop-search-bar {
-  width: 140px;
+  width: 70;
   height: 30px;
   border-radius: 4px;
   border: solid #ced4da;
-  margin-bottom: 10px;
+  margin-bottom: 0.63rem;
 }
+
+/* Search Results */
 
 .search-heading {
   color: #783b03;
   font-family: Inter, sans-serif;
-  padding-top: 10px;
+  padding-top: 0.63rem;
 }
 
 .search-bar {
   width: 100%;
-  margin-top: 5px;
+  margin-top: 0.31rem;
   height: 30px;
   border-radius: 4px;
   border: solid #ced4da;
@@ -153,28 +159,28 @@
 }
 
 .search-results-padding {
-  padding: 20px 0;
+  padding: 1.25rem 0;
 }
 
 .search-book-title {
   font-family: Inter, sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
   margin: 0;
-  padding-bottom: 2px;
+  padding-bottom: 0.13rem;
 }
 
 .book-details-container {
-  margin-left: 10px;
+  margin-left: 0.63rem;
 }
 
 .search-author,
 .search-date,
 .search-synopsis {
   font-family: Inter, sans-serif;
-  font-size: 14px;
+  font-size: 0.88rem;
   margin: 0;
-  padding: 2px 0;
+  padding: 0.125rem 0;
 }
 
 .search-image {
@@ -182,7 +188,7 @@
 }
 
 .search-synopsis {
-  padding-top: 10px;
+  padding-top: 0.625rem;
 }
 
 .no-books-search {
@@ -193,14 +199,16 @@
 
 .add-dropdown {
   font-family: Inter, sans-serif;
-  font-size: 12px;
-  margin-top: 10px;
+  font-size: 0.75rem;
+  margin-top: 0.625rem;
   background-color: #f67070;
   color: #f8f8ee;
-  height: 30px;
+  padding: 0.5rem 0;
   border: none;
   border-radius: 2px;
 }
+
+/* Book Entry Details */
 
 .modal-background {
   background-color: rgba(0 0 0/ 0.8);
@@ -225,11 +233,11 @@
   position: relative;
   top: 5px;
   left: 5px;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .book-modal-padding {
-  padding: 10px 25px;
+  padding: 0.625rem 1.56rem;
 }
 
 .book-image {
@@ -239,18 +247,18 @@
 
 .modal-book-details {
   font-family: Inter, sans-serif;
-  margin-left: 10px;
+  margin-left: 0.625rem;
 }
 
 .modal-book-title {
-  font-size: 16px;
+  font-size: 1rem;
   margin: 0;
 }
 
 .modal-author,
 .modal-date {
-  font-size: 14px;
-  margin: 5px 0;
+  font-size: 0.875rem;
+  margin: 0.31rem 0;
 }
 
 .bookshelf-label,
@@ -258,21 +266,21 @@
 .completed-date-label,
 .completed-date-label-deselect {
   font-family: Inter, sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .bookshelf-select,
 .completed-date,
 .completed-date-deselect {
   font-family: Inter, sans-serif;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #f67070;
   height: 30px;
   width: 100px;
   border: solid 1px;
   border-radius: 2px;
   text-align: center;
-  margin-left: 5px;
+  margin-left: 0.31rem;
 }
 
 .completed-date-label-deselect {
@@ -295,14 +303,16 @@
   height: 30px;
   width: 90px;
   font-family: Inter, sans-serif;
-  font-size: 18px;
-  margin-top: 20px;
+  font-size: 1.125rem;
+  margin-top: 1.25rem;
 }
+
+/* My Books */
 
 .my-books-heading {
   color: #783b03;
   font-family: Inter, sans-serif;
-  margin: 20px 0 40px;
+  margin: 1.25rem 0 2.5rem;
   text-align: center;
 }
 
@@ -310,11 +320,11 @@
   color: #783b03;
   font-family: Inter, sans-serif;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .my-books-list-items {
-  padding-bottom: 40px;
+  padding-bottom: 2.5rem;
 }
 
 .library-row {
@@ -322,7 +332,7 @@
 }
 
 .library-books-detail-padding {
-  padding-left: 10px;
+  padding-left: 0.625rem;
 }
 
 .library-cover-img {
@@ -333,7 +343,7 @@
   font-family: Inter, sans-serif;
   margin: 0;
   font-weight: bolder;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .library-author-date,
@@ -341,9 +351,9 @@
 .library-date-completed,
 .library-not-completed {
   font-family: Inter, sans-serif;
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: 0;
-  padding-top: 5px;
+  padding-top: 0.31rem;
 }
 
 .library-not-completed {
@@ -351,16 +361,18 @@
 }
 
 .library-books-list {
-  padding: 0 20px;
+  padding: 0 1.25rem;
 }
+
+/* Home Page */
 
 .home-read-shelf-title,
 .home-to-read-shelf-title {
   font-family: Inter, sans-serif;
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #783b03;
   font-weight: normal;
-  margin: 40px 0 0;
+  margin: 2.5rem 0 0;
   display: inline-block;
 }
 
@@ -375,7 +387,7 @@
 
 .home-cover-img {
   height: 100px;
-  margin-top: 20px;
+  margin-top: 1.25rem;
   box-shadow: 10px 2px 5px -5px rgba(0, 0, 0, 0.5);
 }
 
@@ -385,7 +397,7 @@
 
 .home-placeholder-text {
   font-family: Inter, sans-serif;
-  font-size: 15px;
+  font-size: 0.94rem;
   color: #f67070;
   position: relative;
   top: -40px;
@@ -398,6 +410,8 @@
 .placeholder-column-size {
   height: 100px;
 }
+
+/* Auth (sign-in and sign-up) */
 
 .auth-background {
   background-color: rgb(157, 16, 16);
@@ -557,6 +571,8 @@
   margin-top: -0.1rem;
 }
 
+/* Pseudo-classes */
+
 .search-icon:hover,
 .home-icon:hover,
 .sign-out-icon:hover,
@@ -609,6 +625,8 @@
   border-color: #f67070;
 }
 
+/* Loading Spinner */
+
 @keyframes grow-and-shrink {
   0% {
     transform: scale(1);
@@ -652,7 +670,7 @@
 
   .navbar {
     height: 65px;
-    padding: 0 45px;
+    padding: 0 2.8rem;
   }
 
   .logo {
@@ -660,7 +678,7 @@
   }
 
   .title {
-    font-size: 32px;
+    font-size: 2rem;
   }
 
   .home-icon,
@@ -679,7 +697,7 @@
   }
 
   .no-books-search {
-    font-size: 1rem;
+    font-size: 0.625rem;
   }
 
   .book-details-modal-window {
@@ -688,11 +706,11 @@
   }
 
   .book-modal-exit {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   .book-modal-padding {
-    padding: 15px 45px;
+    padding: 0.94rem 2.81rem;
   }
 
   .book-image {
@@ -701,12 +719,12 @@
   }
 
   .modal-book-title {
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 
   .modal-author,
   .modal-date {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .bookshelf-select,
@@ -717,11 +735,11 @@
   }
 
   .modal-save-button {
-    margin-top: 40px;
+    margin-top: 2.5rem;
   }
 
   .no-books-text {
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 
   .library-books-list {
@@ -738,13 +756,13 @@
 
   .home-read-shelf-title,
   .home-to-read-shelf-title {
-    font-size: 32px;
-    margin: 40px 0 0;
+    font-size: 2rem;
+    margin: 2.5rem 0 0;
   }
 
   .home-cover-img {
     height: 140px;
-    margin-top: 30px;
+    margin-top: 1.875rem;
   }
 
   .cover-li:nth-of-type(1n+4) {
@@ -752,7 +770,7 @@
   }
 
   .home-placeholder-text {
-    font-size: 17px;
+    font-size: 1.06rem;
     position: relative;
     top: -80px;
   }
