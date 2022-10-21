@@ -78,6 +78,7 @@ Try the application live at [https://bookworm.tarraghaffari.net/]
     ```
 
 5. Start PostgreSQL
+
     ```shell
     sudo service postgresql start
     ```
@@ -90,7 +91,7 @@ Try the application live at [https://bookworm.tarraghaffari.net/]
 
 7. Import the database to PostgreSQL
 
-  ```shell
+    ```shell
     npm run db:import
     ```
 
