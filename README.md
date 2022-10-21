@@ -71,13 +71,36 @@ Try the application live at [https://bookworm.tarraghaffari.net/]
     npm install
     ```
 
-4. Import the example database to Pgweb.
+4. Make a copy of .env.example named .env and set your API key, token secret, database url, guest username, and guest password.
+
+    ```shell
+    cp .env.example.env
+    ```
+
+5. Start PostgreSQL
+    ```shell
+    sudo service postgresql start
+    ```
+
+6. Create a new database with PostgreSQL.
+
+   ```shell
+    createdb bookworm
+    ```
+
+7. Import the database to PostgreSQL
+
+  ```shell
+    npm run db:import
+    ```
+
+8. Import the example database to Pgweb.
 
     ```shell
     pgweb --db=bookworm
     ```
 
-5. Start the project. Once started you can view the application by opening http://localhost:3000 in your browser.
+9. Start the project. Once started you can view the application by opening http://localhost:3000 in your browser.
 
     ```shell
     npm run dev
