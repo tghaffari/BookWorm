@@ -473,7 +473,6 @@
   font-size: 0.9rem;
   color: #a50505;
   position: absolute;
-  text-align: center;
   left: 15%;
   top: -2rem;
 }
@@ -823,6 +822,10 @@
 
   .auth-redirect-link {
     font-size: 0.8rem;
+  }
+
+  .invalid-login-message {
+    left: 30%;
   }
 
   @keyframes grow-and-shrink {
