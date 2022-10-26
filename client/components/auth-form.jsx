@@ -115,7 +115,7 @@ export default class AuthForm extends React.Component {
             this.props.onSignIn(result);
           }
         })
-        .catch(handleFetchRejection);
+        .catch(err => console.error(err));
     }
   }
 
