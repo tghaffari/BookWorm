@@ -16,7 +16,10 @@ export default class BookEntryDetailsModal extends React.Component {
     if (event.target.value === 'read') {
       this.setState({ bookshelf: 'read' });
     } else if (event.target.value === 'to-read') {
-      this.setState({ bookshelf: 'to-read' });
+      this.setState({
+        bookshelf: 'to-read',
+        completedDate: null
+      });
     }
   }
 
@@ -39,6 +42,10 @@ export default class BookEntryDetailsModal extends React.Component {
     let options = null;
     let input = null;
     let dateCompletedClassName = null;
+    const date = new Date();
+    const [year, month, day] = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
+    const todaysDate = `${year}-${month}-${day}`;
+
     if (this.state.bookshelf === 'read') {
       options = (
         <>
@@ -46,7 +53,15 @@ export default class BookEntryDetailsModal extends React.Component {
           <option value="to-read">TO-READ</option>
         </>
       );
-      input = <input type="date" id="completedDate" name="completedDate" className="completed-date" required onChange={this.handleDateChange}/>;
+      input = <input
+              type="date"
+              id="completedDate"
+              name="completedDate"
+              className="completed-date"
+              max={todaysDate}
+              onChange={this.handleDateChange}
+              required
+              />;
       dateCompletedClassName = 'completed-date-label';
     } else if (this.state.bookshelf === 'to-read') {
       options = (
@@ -55,7 +70,7 @@ export default class BookEntryDetailsModal extends React.Component {
           <option value="to-read">TO-READ</option>
         </>
       );
-      input = <input type="date" id="completedDate" name="completedDate" className="completed-date-deselect" disabled />;
+      input = <input type="date" id="completedDate" name="completedDate" className="completed-date-deselect" value='' disabled />;
       dateCompletedClassName = 'completed-date-label-deselect';
     }
 
