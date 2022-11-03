@@ -5,7 +5,7 @@ export default class BookEntryDetailsModal extends React.Component {
     super(props);
     this.state = {
       bookshelf: 'read',
-      completedDate: null
+      completedDate: ''
     };
     this.handleBookShelfSelect = this.handleBookShelfSelect.bind(this);
     this.handleModalSubmit = this.handleModalSubmit.bind(this);
@@ -14,7 +14,10 @@ export default class BookEntryDetailsModal extends React.Component {
 
   handleBookShelfSelect(event) {
     if (event.target.value === 'read') {
-      this.setState({ bookshelf: 'read' });
+      this.setState({
+        bookshelf: 'read',
+        completedDate: ''
+      });
     } else if (event.target.value === 'to-read') {
       this.setState({
         bookshelf: 'to-read',
@@ -42,9 +45,7 @@ export default class BookEntryDetailsModal extends React.Component {
     let options = null;
     let input = null;
     let dateCompletedClassName = null;
-    const date = new Date();
-    const [year, month, day] = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
-    const todaysDate = `${year}-${month}-${day}`;
+    const todaysDate = new Date().toISOString().slice(0, 10);
 
     if (this.state.bookshelf === 'read') {
       options = (
@@ -59,6 +60,7 @@ export default class BookEntryDetailsModal extends React.Component {
               name="completedDate"
               className="completed-date"
               max={todaysDate}
+              value= {this.state.completedDate}
               onChange={this.handleDateChange}
               required
               />;
@@ -70,7 +72,13 @@ export default class BookEntryDetailsModal extends React.Component {
           <option value="to-read">TO-READ</option>
         </>
       );
-      input = <input type="date" id="completedDate" name="completedDate" className="completed-date-deselect" value='' disabled />;
+      input = <input
+              type="date"
+              id="completedDate"
+              name="completedDate"
+              className="completed-date-deselect"
+              value=''
+              disabled />;
       dateCompletedClassName = 'completed-date-label-deselect';
     }
 
