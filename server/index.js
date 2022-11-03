@@ -91,7 +91,10 @@ app.use(authorizationMiddleware);
 
 app.post('/api/saveBooks', (req, res, next) => {
   const { userId } = req.user;
-  const { googleId, title, author, publishedYear, isbn, coverImgURL, completedAt = null, description = null } = req.body;
+  const {
+    googleId, title, author, publishedYear, isbn, coverImgURL,
+    completedAt = null, description = null, quote = null, quotePageNumber = null
+  } = req.body;
 
   if (!googleId || !title || !author || !publishedYear || !isbn || !coverImgURL) {
     throw new ClientError(
@@ -121,6 +124,13 @@ app.post('/api/saveBooks', (req, res, next) => {
       returning*
       `;
 
+  const sqlQuote = `
+    insert into "quotes" ("userId", "bookId", "quote", "pageNumber")
+    values ($1, $2, $3, $4)
+    returning *
+    `
+    ;
+
   db.query(sqlGetBookId, paramsGetBookId)
     .then(resultingBook => {
       if (resultingBook.rows.length) return resultingBook.rows[0].bookId;
@@ -136,6 +146,14 @@ app.post('/api/saveBooks', (req, res, next) => {
       return db
         .query(sqlLibrary, paramsLibrary)
         .then(result => result.rows);
+    })
+    .then(result => { // insert quote save here with an if statment ??
+      if (quote !== null) {
+        const paramsQuote = [userId, Number(result[0].bookId), quote, quotePageNumber];
+        return db
+          .query(sqlQuote, paramsQuote)
+          .then(result => result.rows);
+      } else return result;
     })
     .then(result => res.status(201).json(result))
     .catch(err => next(err));
