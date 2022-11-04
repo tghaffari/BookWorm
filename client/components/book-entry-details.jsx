@@ -5,11 +5,15 @@ export default class BookEntryDetailsModal extends React.Component {
     super(props);
     this.state = {
       bookshelf: 'read',
-      completedDate: ''
+      completedDate: '',
+      quote: '',
+      pageNumber: ''
     };
     this.handleBookShelfSelect = this.handleBookShelfSelect.bind(this);
     this.handleModalSubmit = this.handleModalSubmit.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleQuoteChange = this.handleQuoteChange.bind(this);
+    this.handlePageNumberChange = this.handlePageNumberChange.bind(this);
   }
 
   handleBookShelfSelect(event) {
@@ -28,6 +32,14 @@ export default class BookEntryDetailsModal extends React.Component {
 
   handleDateChange(event) {
     this.setState({ completedDate: event.target.value });
+  }
+
+  handleQuoteChange(event) {
+    this.setState({ quote: event.target.value });
+  }
+
+  handlePageNumberChange(event) {
+    this.setState({ pageNumber: event.target.value });
   }
 
   handleModalSubmit(event) {
@@ -82,6 +94,10 @@ export default class BookEntryDetailsModal extends React.Component {
       dateCompletedClassName = 'completed-date-label-deselect';
     }
 
+    // const pageNumberRequirement = (this.state.quote !== '')
+    //   ? 'required'
+    //   : 'disabled';
+
     return (
       <div className='modal-background'>
         <div className='book-details-modal-window'>
@@ -107,6 +123,16 @@ export default class BookEntryDetailsModal extends React.Component {
             <div className="row book-modal-padding align-items-center">
               <label htmlFor="completedDate" className={dateCompletedClassName}>Date Completed: </label>
               {input}
+            </div>
+            <div className="row book-modal-padding align-items-center">
+              <label htmlFor='quote' className='quote-label'> Favorite quote? Enter it here!
+                <textarea id='quote' className='quote-input' value = {this.state.quote} onChange={this.handleQuoteChange}></textarea>
+              </label>
+            </div>
+            <div className="row book-modal-padding-page-number align-items-center">
+              <label htmlFor='pageNumber' className='page-number-label'>Page no.
+                <input className="page-number-input" value={this.state.pageNumber} onChange={this.handlePageNumberChange} required='false'></input>
+              </label>
             </div>
             <div className="row book-modal-padding justify-content-end">
               <div className="column-flex">
