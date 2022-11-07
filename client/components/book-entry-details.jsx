@@ -94,9 +94,7 @@ export default class BookEntryDetailsModal extends React.Component {
       dateCompletedClassName = 'completed-date-label-deselect';
     }
 
-    // const pageNumberRequirement = (this.state.quote !== '')
-    //   ? 'required'
-    //   : 'disabled';
+    const pageNumberRequirement = (this.state.quote !== '');
 
     return (
       <div className='modal-background'>
@@ -126,12 +124,21 @@ export default class BookEntryDetailsModal extends React.Component {
             </div>
             <div className="row book-modal-padding align-items-center">
               <label htmlFor='quote' className='quote-label'> Favorite quote? Enter it here!
-                <textarea id='quote' className='quote-input' value = {this.state.quote} onChange={this.handleQuoteChange}></textarea>
+                <textarea
+                  id='quote'
+                  className='quote-input'
+                  value = {this.state.quote}
+                  onChange={this.handleQuoteChange}>
+                </textarea>
               </label>
             </div>
             <div className="row book-modal-padding-page-number align-items-center">
               <label htmlFor='pageNumber' className='page-number-label'>Page no.
-                <input className="page-number-input" value={this.state.pageNumber} onChange={this.handlePageNumberChange} required='false'></input>
+                <input
+                  className="page-number-input"
+                  value={this.state.pageNumber}
+                  onChange={this.handlePageNumberChange}
+                  required={pageNumberRequirement}></input>
               </label>
             </div>
             <div className="row book-modal-padding justify-content-end">
