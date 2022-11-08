@@ -5,16 +5,23 @@ export default class BookEntryDetailsModal extends React.Component {
     super(props);
     this.state = {
       bookshelf: 'read',
-      completedDate: null
+      completedDate: '',
+      quote: '',
+      pageNumber: ''
     };
     this.handleBookShelfSelect = this.handleBookShelfSelect.bind(this);
     this.handleModalSubmit = this.handleModalSubmit.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleQuoteChange = this.handleQuoteChange.bind(this);
+    this.handlePageNumberChange = this.handlePageNumberChange.bind(this);
   }
 
   handleBookShelfSelect(event) {
     if (event.target.value === 'read') {
-      this.setState({ bookshelf: 'read' });
+      this.setState({
+        bookshelf: 'read',
+        completedDate: ''
+      });
     } else if (event.target.value === 'to-read') {
       this.setState({
         bookshelf: 'to-read',
@@ -27,11 +34,21 @@ export default class BookEntryDetailsModal extends React.Component {
     this.setState({ completedDate: event.target.value });
   }
 
+  handleQuoteChange(event) {
+    this.setState({ quote: event.target.value });
+  }
+
+  handlePageNumberChange(event) {
+    this.setState({ pageNumber: event.target.value });
+  }
+
   handleModalSubmit(event) {
     event.preventDefault();
 
     const bookDetails = this.props.book;
     bookDetails.completedAt = this.state.completedDate;
+    bookDetails.quote = this.state.quote;
+    bookDetails.quotePageNumber = this.state.pageNumber;
 
     this.props.saveBook(bookDetails);
 
@@ -42,9 +59,7 @@ export default class BookEntryDetailsModal extends React.Component {
     let options = null;
     let input = null;
     let dateCompletedClassName = null;
-    const date = new Date();
-    const [year, month, day] = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
-    const todaysDate = `${year}-${month}-${day}`;
+    const todaysDate = new Date().toISOString().slice(0, 10);
 
     if (this.state.bookshelf === 'read') {
       options = (
@@ -59,6 +74,7 @@ export default class BookEntryDetailsModal extends React.Component {
               name="completedDate"
               className="completed-date"
               max={todaysDate}
+              value= {this.state.completedDate}
               onChange={this.handleDateChange}
               required
               />;
@@ -70,9 +86,17 @@ export default class BookEntryDetailsModal extends React.Component {
           <option value="to-read">TO-READ</option>
         </>
       );
-      input = <input type="date" id="completedDate" name="completedDate" className="completed-date-deselect" value='' disabled />;
+      input = <input
+              type="date"
+              id="completedDate"
+              name="completedDate"
+              className="completed-date-deselect"
+              value=''
+              disabled />;
       dateCompletedClassName = 'completed-date-label-deselect';
     }
+
+    const pageNumberRequirement = (this.state.quote !== '');
 
     return (
       <div className='modal-background'>
@@ -91,7 +115,12 @@ export default class BookEntryDetailsModal extends React.Component {
             </div>
             <div className="row book-modal-padding align-items-center">
               <label id="bookshelf" className="bookshelf-label">Bookshelf:
-                <select name="bookshelf" className="bookshelf-select" onChange={this.handleBookShelfSelect} defaultValue={this.state.bookshelf}>
+                <select
+                  name="bookshelf"
+                  className="bookshelf-select"
+                  onChange={this.handleBookShelfSelect}
+                  defaultValue={this.state.bookshelf}
+                >
                   {options}
                 </select>
               </label>
@@ -99,6 +128,28 @@ export default class BookEntryDetailsModal extends React.Component {
             <div className="row book-modal-padding align-items-center">
               <label htmlFor="completedDate" className={dateCompletedClassName}>Date Completed: </label>
               {input}
+            </div>
+            <div className="row book-modal-padding align-items-center">
+              <label htmlFor='quote' className='quote-label'> Favorite quote? Enter it here!
+                <textarea
+                  id='quote'
+                  className='quote-input'
+                  value = {this.state.quote}
+                  onChange={this.handleQuoteChange}
+                  >
+                </textarea>
+              </label>
+            </div>
+            <div className="row book-modal-padding-page-number align-items-center">
+              <label htmlFor='pageNumber' className='page-number-label'>Page no.
+                <input
+                  className="page-number-input"
+                  value={this.state.pageNumber}
+                  onChange={this.handlePageNumberChange}
+                  required={pageNumberRequirement}
+                >
+                </input>
+              </label>
             </div>
             <div className="row book-modal-padding justify-content-end">
               <div className="column-flex">
