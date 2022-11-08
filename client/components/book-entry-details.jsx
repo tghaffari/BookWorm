@@ -47,6 +47,8 @@ export default class BookEntryDetailsModal extends React.Component {
 
     const bookDetails = this.props.book;
     bookDetails.completedAt = this.state.completedDate;
+    bookDetails.quote = this.state.quote;
+    bookDetails.quotePageNumber = this.state.pageNumber;
 
     this.props.saveBook(bookDetails);
 
@@ -113,7 +115,12 @@ export default class BookEntryDetailsModal extends React.Component {
             </div>
             <div className="row book-modal-padding align-items-center">
               <label id="bookshelf" className="bookshelf-label">Bookshelf:
-                <select name="bookshelf" className="bookshelf-select" onChange={this.handleBookShelfSelect} defaultValue={this.state.bookshelf}>
+                <select
+                  name="bookshelf"
+                  className="bookshelf-select"
+                  onChange={this.handleBookShelfSelect}
+                  defaultValue={this.state.bookshelf}
+                >
                   {options}
                 </select>
               </label>
@@ -128,7 +135,8 @@ export default class BookEntryDetailsModal extends React.Component {
                   id='quote'
                   className='quote-input'
                   value = {this.state.quote}
-                  onChange={this.handleQuoteChange}>
+                  onChange={this.handleQuoteChange}
+                  >
                 </textarea>
               </label>
             </div>
@@ -138,7 +146,9 @@ export default class BookEntryDetailsModal extends React.Component {
                   className="page-number-input"
                   value={this.state.pageNumber}
                   onChange={this.handlePageNumberChange}
-                  required={pageNumberRequirement}></input>
+                  required={pageNumberRequirement}
+                >
+                </input>
               </label>
             </div>
             <div className="row book-modal-padding justify-content-end">

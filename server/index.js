@@ -92,8 +92,8 @@ app.use(authorizationMiddleware);
 app.post('/api/saveBooks', (req, res, next) => {
   const { userId } = req.user;
   const {
-    googleId, title, author, publishedYear, isbn, coverImgURL,
-    completedAt = null, description = null, quote = null, quotePageNumber = null
+    googleId, title, author, publishedYear, isbn, coverImgURL, quote,
+    completedAt = null, description = null, quotePageNumber = null
   } = req.body;
 
   if (!googleId || !title || !author || !publishedYear || !isbn || !coverImgURL) {
@@ -147,8 +147,8 @@ app.post('/api/saveBooks', (req, res, next) => {
         .query(sqlLibrary, paramsLibrary)
         .then(result => result.rows);
     })
-    .then(result => { // insert quote save here with an if statment ??
-      if (quote !== null) {
+    .then(result => {
+      if (quote !== '') {
         const paramsQuote = [userId, Number(result[0].bookId), quote, quotePageNumber];
         return db
           .query(sqlQuote, paramsQuote)
