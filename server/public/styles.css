@@ -83,6 +83,7 @@
   margin: 0;
   font-family: Inter, sans-serif;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .nav-items-padding {
@@ -91,24 +92,16 @@
 
 .home-icon,
 .book-icon,
-.sign-out-icon {
-  color: #f8f8ee;
-  font-size: 1.5rem;
-}
-
+.sign-out-icon,
 .quotes-icon {
   color: #f8f8ee;
-  font-size: 2.2rem;
+  font-size: 1.5rem;
 }
 
 .sign-out-button {
   background: none;
   border: none;
   padding: 0;
-}
-
-.book-icon {
-  font-size: 1.63rem;
 }
 
 .mobile-search-bar {
@@ -121,6 +114,10 @@
 
 .nav-search-row {
   height: 100%;
+}
+
+.search-white-space {
+  white-space: nowrap;
 }
 
 .cancel-search {
@@ -712,14 +709,8 @@
     font-size: 2rem;
   }
 
-  .home-icon,
-  .search-icon,
-  .sign-out-icon {
-    font-size: 24px;
-  }
-
   .cancel-search {
-    font-size: 10px;
+    font-size: 0.625rem;
   }
 
   .search-bar {

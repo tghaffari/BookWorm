@@ -70,14 +70,17 @@ export default class Navbar extends React.Component {
             <a href="#library"><i className="fa-solid fa-book book-icon"></i></a>
           </li>
           <li className='column-one-third text-align-center'>
-            <a href="#quotes"><i className="bi bi-blockquote-right quotes-icon"></i></a>
+            <a href="#quotes">
+              <i className="fa-solid fa-quote-left quotes-icon">&nbsp;</i>
+              <i className="fa-solid fa-quote-right quotes-icon"></i>
+            </a>
           </li>
         </ul>
         );
 
     const desktopNav = this.state.search
       ? (
-        <form onSubmit={this.handleSearchSubmit}>
+        <form onSubmit={this.handleSearchSubmit} className='search-white-space'>
           <input
           type="search"
           placeholder='Search Books'
@@ -135,6 +138,13 @@ export default class Navbar extends React.Component {
                 <a className="nav-link" href="#library">
                   <i className="fa-solid fa-book book-icon"></i>
                   <p className='nav-text'>Library</p>
+                </a>
+              </li>
+              <li className='nav-items-padding text-align-center'>
+                <a className="nav-link" href="#quotes">
+                  <i className="fa-solid fa-quote-left quotes-icon"> &nbsp;</i>
+                  <i className="fa-solid fa-quote-right quotes-icon"></i>
+                  <p className='nav-text'>Quotes</p>
                 </a>
               </li>
               <li className="nav-items-padding text-align-center">
