@@ -213,3 +213,22 @@ app.get('/api/getRecentBooks', (req, res, next) => {
     .then(result => res.status(201).json(result.rows))
     .catch(err => next(err));
 });
+
+app.get('/api/getQuotes', (req, res, next) => {
+  const { userId } = req.user;
+  const sqlGetQuotes = `
+  select "quote",
+        "pageNumber",
+        "title",
+        "author"
+    from "quotes"
+    join "books" using "bookId"
+    where "userId" = $1
+    order by "quotedAt" desc
+  `;
+  const paramsGetQuotes = [userId];
+
+  db.query(sqlGetQuotes, paramsGetQuotes)
+    .then(result => res.status(201).json(result.rows))
+    .catch(err => next(err));
+});
