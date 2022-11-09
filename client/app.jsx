@@ -9,6 +9,7 @@ import AuthPage from './pages/auth';
 import AuthBackround from './components/auth-background';
 import AppContext from './lib/app-context';
 import jwtDecode from 'jwt-decode';
+import Quotes from './pages/quotes';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -54,6 +55,8 @@ export default class App extends React.Component {
       return <Home />;
     } else if (path === 'sign-up' || path === 'sign-in') {
       return <AuthPage />;
+    } else if (path === 'quotes') {
+      return <Quotes />;
     }
   }
 

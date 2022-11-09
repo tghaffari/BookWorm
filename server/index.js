@@ -222,7 +222,7 @@ app.get('/api/getQuotes', (req, res, next) => {
         "title",
         "author"
     from "quotes"
-    join "books" using "bookId"
+    join "books" using ("bookId")
     where "userId" = $1
     order by "quotedAt" desc
   `;
