@@ -96,6 +96,11 @@
   font-size: 1.5rem;
 }
 
+.quotes-icon {
+  color: #f8f8ee;
+  font-size: 2.2rem;
+}
+
 .sign-out-button {
   background: none;
   border: none;
@@ -622,7 +627,8 @@
 .cancel-search:hover,
 .cancel-search-desktop:hover,
 .book-modal-exit:hover,
-.book-icon:hover {
+.book-icon:hover,
+.quotes-icon:hover {
   color: #783b03;
   transition: 1s;
 }

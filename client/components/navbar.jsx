@@ -62,12 +62,15 @@ export default class Navbar extends React.Component {
         </div>
         )
       : (
-        <ul className="row align-items-center justify-content-center mobile-navbar-list">
-          <li className='column-one-third'>
+        <ul className="row align-items-center mobile-navbar-list">
+          <li className='column-one-third text-align-center'>
             <a href="#home"><i className='fa-solid fa-house home-icon'></i></a>
           </li>
-          <li className='column-one-third'>
+          <li className='column-one-third text-align-center'>
             <a href="#library"><i className="fa-solid fa-book book-icon"></i></a>
+          </li>
+          <li className='column-one-third text-align-center'>
+            <a href="#quotes"><i className="bi bi-blockquote-right quotes-icon"></i></a>
           </li>
         </ul>
         );
