@@ -41,13 +41,14 @@ export default class Quotes extends React.Component {
     const quotes = this.state.quotes.map(quotes => {
       // console.log(quotes);
       const { quote, author, title, pageNumber } = quotes;
-      // add a condition in case author doesn't exist.
+      // add a condition in case author doesn't exist or if there's more than one, add an &.
+      // console.log(author);
       return (
         <li key={pageNumber}>
           <p className='quote'> &quot;{quote}&quot;</p>
-          <p className='quote-details'>- ${author},
-            <span className='quote-title-page-number'> {title}, {pageNumber}
-            </span>
+          <p className='quote-details'>- {author},
+            <em> {title}, pg. {pageNumber}
+            </em>
           </p>
         </li>
       );
@@ -55,7 +56,7 @@ export default class Quotes extends React.Component {
 
     return (
       <>
-        <h1 className='quotes-header'>Favorite Quotes</h1>
+        <h1 className='favorite-quotes-heading'>Favorite Quotes</h1>
         <ul className='quotes-list'>
           {quotes}
         </ul>

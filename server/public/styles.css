@@ -335,7 +335,8 @@
 
 /* My Books */
 
-.my-books-heading {
+.my-books-heading,
+.favorite-quotes-heading {
   color: #783b03;
   font-family: Inter, sans-serif;
   margin: 1.25rem 0 2.5rem;
@@ -594,6 +595,22 @@
   display: block;
   content: "";
   margin-top: -0.1rem;
+}
+
+/* Quotes */
+
+.quote {
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.quote-details {
+  font-family: Inter, sans-serif;
+  font-size: 0.7rem;
+  text-align: center;
+  margin: 0 0 2rem;
 }
 
 /* Pseudo-classes */
