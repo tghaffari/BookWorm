@@ -23,7 +23,7 @@ CREATE TABLE "public"."books" (
 	"bookId" serial NOT NULL,
 	"googleId" TEXT NOT NULL,
 	"title" TEXT NOT NULL,
-	"author" TEXT NOT NULL,
+	"author" TEXT,
 	"description" TEXT,
 	"publishedYear" TEXT NOT NULL,
 	"isbn" TEXT NOT NULL UNIQUE,

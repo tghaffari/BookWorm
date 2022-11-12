@@ -19,11 +19,6 @@ const app = express();
 
 app.use(express.json());
 app.use(staticMiddleware);
-app.use(errorMiddleware);
-
-app.listen(process.env.PORT, () => {
-  process.stdout.write(`\n\napp listening on port ${process.env.PORT}\n\n`);
-});
 
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { username, password, name } = req.body;
@@ -91,15 +86,21 @@ app.use(authorizationMiddleware);
 
 app.post('/api/saveBooks', (req, res, next) => {
   const { userId } = req.user;
-  const {
-    googleId, title, author, publishedYear, isbn, coverImgURL, quote,
+  let {
+    googleId, title, author, publishedYear, isbn, coverImgURL, quote = '',
     completedAt = null, description = null, quotePageNumber = null
   } = req.body;
 
-  if (!googleId || !title || !author || !publishedYear || !isbn || !coverImgURL) {
+  if (author === '') {
+    author = null;
+  }
+
+  // console.log(req.body);
+
+  if (!googleId || !title || !publishedYear || !isbn || !coverImgURL) {
     throw new ClientError(
       400,
-      'googleId, title, author, publishedYear, isbn, coverImgURL are required fields');
+      'googleId, title, publishedYear, isbn, coverImgURL are required fields');
   }
 
   const sqlGetBookId = `
@@ -231,4 +232,10 @@ app.get('/api/getQuotes', (req, res, next) => {
   db.query(sqlGetQuotes, paramsGetQuotes)
     .then(result => res.status(201).json(result.rows))
     .catch(err => next(err));
+});
+
+app.use(errorMiddleware);
+
+app.listen(process.env.PORT, () => {
+  process.stdout.write(`\n\napp listening on port ${process.env.PORT}\n\n`);
 });
