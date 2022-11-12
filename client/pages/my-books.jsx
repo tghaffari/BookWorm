@@ -66,6 +66,18 @@ export default class MyBooks extends React.Component {
           </>
           );
 
+      const authorAndYear = (book.author)
+        ? (
+          <>
+              <p className='library-author-date'> {book.author}   &#8226;   {book.publishedYear}</p>
+          </>
+          )
+        : (
+          <>
+            <p className='library-author-date'> <em>No Author</em>   &#8226;   {book.publishedYear}</p>
+          </>
+          );
+
       return (
         <>
           <li className='column-one-half column-full my-books-list-items' key={book.googleId} data-id={book.bookId} >
@@ -75,7 +87,7 @@ export default class MyBooks extends React.Component {
                 </div>
                 <div className='column-flex library-books-detail-padding'>
                   <p className='library-book-title'> {book.title}</p>
-                  <p className='library-author-date'> {book.author}   &#8226;   {book.publishedYear}</p>
+                  {authorAndYear}
                   {completedDate}
                 </div>
             </div>
@@ -90,7 +102,7 @@ export default class MyBooks extends React.Component {
         <ul className='library-books-list'>
           {books}
         </ul>
-    </>
+      </>
 
     );
   }

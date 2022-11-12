@@ -414,8 +414,10 @@
 
 .home-cover-img {
   height: 100px;
+  max-width: 65px;
   margin-top: 1.25rem;
   box-shadow: 10px 2px 5px -5px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
 }
 
 .cover-li:nth-of-type(1n+4) {
