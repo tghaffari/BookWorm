@@ -95,8 +95,6 @@ app.post('/api/saveBooks', (req, res, next) => {
     author = null;
   }
 
-  // console.log(req.body);
-
   if (!googleId || !title || !publishedYear || !isbn || !coverImgURL) {
     throw new ClientError(
       400,
@@ -148,14 +146,14 @@ app.post('/api/saveBooks', (req, res, next) => {
         .query(sqlLibrary, paramsLibrary)
         .then(result => result.rows);
     })
-    .then(result => {
-      if (quote !== '') {
-        const paramsQuote = [userId, Number(result[0].bookId), quote, quotePageNumber];
-        return db
-          .query(sqlQuote, paramsQuote)
-          .then(result => result.rows);
-      } else return result;
-    })
+    // .then(result => {
+    //   if (quote !== '') {
+    //     const paramsQuote = [userId, Number(result[0].bookId), quote, quotePageNumber];
+    //     return db
+    //       .query(sqlQuote, paramsQuote)
+    //       .then(result => result.rows);
+    //   } else return result;
+    // })
     .then(result => res.status(201).json(result))
     .catch(err => next(err));
 });

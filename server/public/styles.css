@@ -798,7 +798,8 @@
   }
 
   .home-cover-img {
-    height: 140px;
+    height: 125px;
+    max-width: 80px;
     margin-top: 1.875rem;
   }
 
