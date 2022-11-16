@@ -83,6 +83,7 @@
   margin: 0;
   font-family: Inter, sans-serif;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .nav-items-padding {
@@ -91,7 +92,8 @@
 
 .home-icon,
 .book-icon,
-.sign-out-icon {
+.sign-out-icon,
+.quotes-icon {
   color: #f8f8ee;
   font-size: 1.5rem;
 }
@@ -100,10 +102,6 @@
   background: none;
   border: none;
   padding: 0;
-}
-
-.book-icon {
-  font-size: 1.63rem;
 }
 
 .mobile-search-bar {
@@ -116,6 +114,10 @@
 
 .nav-search-row {
   height: 100%;
+}
+
+.search-white-space {
+  white-space: nowrap;
 }
 
 .cancel-search {
@@ -333,7 +335,8 @@
 
 /* My Books */
 
-.my-books-heading {
+.my-books-heading,
+.favorite-quotes-heading {
   color: #783b03;
   font-family: Inter, sans-serif;
   margin: 1.25rem 0 2.5rem;
@@ -396,8 +399,12 @@
   font-size: 1.5rem;
   color: #783b03;
   font-weight: normal;
-  margin: 2.5rem 0 0;
+  margin: 2rem 0 0;
   display: inline-block;
+}
+
+.home-to-read-shelf-title {
+  margin-top: 0;
 }
 
 .read-shelf,
@@ -594,6 +601,28 @@
   margin-top: -0.1rem;
 }
 
+/* Quotes */
+
+.quote {
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.quote-details {
+  font-family: Inter, sans-serif;
+  font-size: 0.7rem;
+  text-align: center;
+  margin: 0 0 2rem;
+}
+
+.no-quotes-placeholder-text {
+  font-family: Inter, sans-serif;
+  text-align: center;
+  color: #783b03;
+}
+
 /* Pseudo-classes */
 
 .search-icon:hover,
@@ -622,7 +651,8 @@
 .cancel-search:hover,
 .cancel-search-desktop:hover,
 .book-modal-exit:hover,
-.book-icon:hover {
+.book-icon:hover,
+.quotes-icon:hover {
   color: #783b03;
   transition: 1s;
 }
@@ -706,14 +736,8 @@
     font-size: 2rem;
   }
 
-  .home-icon,
-  .search-icon,
-  .sign-out-icon {
-    font-size: 24px;
-  }
-
   .cancel-search {
-    font-size: 10px;
+    font-size: 0.625rem;
   }
 
   .search-bar {
@@ -773,6 +797,10 @@
 
   .library-books-list {
     padding: 0;
+  }
+
+  .library-books-list li:nth-child(even) {
+    padding-left: 2rem;
   }
 
   .home-read-shelf-title,
@@ -848,6 +876,16 @@
 
   .invalid-login-message {
     left: 30%;
+  }
+
+  .quote {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .quote-details {
+    font-size: 1rem;
+    margin: 0 0 2rem;
   }
 
   @keyframes grow-and-shrink {

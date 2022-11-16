@@ -24,7 +24,8 @@ a {
 
 .search-results-ul,
 .read-shelf-list,
-.to-read-shelf-list {
+.to-read-shelf-list,
+.quotes-list {
   list-style: none;
   padding: 0;
 }

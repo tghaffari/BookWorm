@@ -90,6 +90,9 @@ export default class SearchResults extends React.Component {
     const author = book.volumeInfo.authors?.join(', ') ?? '';
     const publishedYear = book.volumeInfo.publishedDate?.slice(0, 4) ?? '';
     const src = book.volumeInfo.imageLinks?.thumbnail ?? 'https://fivebooks.com/app/uploads/2010/09/no_book_cover.jpg';
+    const isbn = (book.volumeInfo.industryIdentifiers[0].type !== 'ISBN_10')
+      ? 'N/A'
+      : book.volumeInfo.industryIdentifiers[1].identifier;
 
     const bookDetails = {
       googleId: book.id,
@@ -97,7 +100,7 @@ export default class SearchResults extends React.Component {
       author,
       description: book.volumeInfo.description,
       publishedYear,
-      isbn: book.volumeInfo.industryIdentifiers[1].identifier,
+      isbn,
       coverImgURL: src
     };
 

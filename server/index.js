@@ -19,11 +19,6 @@ const app = express();
 
 app.use(express.json());
 app.use(staticMiddleware);
-app.use(errorMiddleware);
-
-app.listen(process.env.PORT, () => {
-  process.stdout.write(`\n\napp listening on port ${process.env.PORT}\n\n`);
-});
 
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { username, password, name } = req.body;
@@ -91,23 +86,27 @@ app.use(authorizationMiddleware);
 
 app.post('/api/saveBooks', (req, res, next) => {
   const { userId } = req.user;
-  const {
-    googleId, title, author, publishedYear, isbn, coverImgURL, quote,
+  let {
+    googleId, title, author, publishedYear, isbn, coverImgURL, quote = '',
     completedAt = null, description = null, quotePageNumber = null
   } = req.body;
 
-  if (!googleId || !title || !author || !publishedYear || !isbn || !coverImgURL) {
+  if (author === '') {
+    author = null;
+  }
+
+  if (!googleId || !title || !publishedYear || !isbn || !coverImgURL) {
     throw new ClientError(
       400,
-      'googleId, title, author, publishedYear, isbn, coverImgURL are required fields');
+      'googleId, title, publishedYear, isbn, coverImgURL are required fields');
   }
 
   const sqlGetBookId = `
     select "bookId"
     from "books"
-    where "isbn"= $1
+    where "googleId"= $1
   `;
-  const paramsGetBookId = [isbn];
+  const paramsGetBookId = [googleId];
 
   const sqlsaveBook = `
     insert into "books"("googleId", "title", "author", "description", "publishedYear", "isbn", "coverImgURL")
@@ -212,4 +211,29 @@ app.get('/api/getRecentBooks', (req, res, next) => {
   db.query(sqlRecentBooks, paramsRecentBooks)
     .then(result => res.status(201).json(result.rows))
     .catch(err => next(err));
+});
+
+app.get('/api/getQuotes', (req, res, next) => {
+  const { userId } = req.user;
+  const sqlGetQuotes = `
+  select "quote",
+        "pageNumber",
+        "title",
+        "author"
+    from "quotes"
+    join "books" using ("bookId")
+    where "userId" = $1
+    order by "quotedAt" desc
+  `;
+  const paramsGetQuotes = [userId];
+
+  db.query(sqlGetQuotes, paramsGetQuotes)
+    .then(result => res.status(201).json(result.rows))
+    .catch(err => next(err));
+});
+
+app.use(errorMiddleware);
+
+app.listen(process.env.PORT, () => {
+  process.stdout.write(`\n\napp listening on port ${process.env.PORT}\n\n`);
 });
