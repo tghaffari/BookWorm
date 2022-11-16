@@ -35,14 +35,17 @@ export default class Quotes extends React.Component {
     if (this.state.quotes === null) return null;
 
     if (this.state.quotes.length === 0) {
-      // console.log('hi');
+      return (
+        <>
+          <h1 className='favorite-quotes-heading'>Favorite Quotes</h1>
+          <p className='no-quotes-placeholder-text'> You have no quotes saved. Start saving books and quotes by clicking search.</p>
+        </>
+      );
     }
 
     const quotes = this.state.quotes.map(quotes => {
-      // console.log(quotes);
+
       const { quote, author, title, pageNumber } = quotes;
-      // add a condition in case author doesn't exist or if there's more than one, add an &.
-      // console.log(author);
       return (
         <li key={pageNumber}>
           <p className='quote'> &quot;{quote}&quot;</p>
@@ -62,9 +65,7 @@ export default class Quotes extends React.Component {
         </ul>
       </>
     );
-
   }
-
 }
 
 Quotes.contextType = AppContext;

@@ -617,6 +617,12 @@
   margin: 0 0 2rem;
 }
 
+.no-quotes-placeholder-text {
+  font-family: Inter, sans-serif;
+  text-align: center;
+  color: #783b03;
+}
+
 /* Pseudo-classes */
 
 .search-icon:hover,
@@ -870,6 +876,16 @@
 
   .invalid-login-message {
     left: 30%;
+  }
+
+  .quote {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .quote-details {
+    font-size: 1rem;
+    margin: 0 0 2rem;
   }
 
   @keyframes grow-and-shrink {
