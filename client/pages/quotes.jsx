@@ -38,7 +38,7 @@ export default class Quotes extends React.Component {
       return (
         <>
           <h1 className='favorite-quotes-heading'>Favorite Quotes</h1>
-          <p className='no-quotes-placeholder-text'> You have no quotes saved. Start saving books and quotes by clicking search.</p>
+          <p className='no-quotes-placeholder-text'> No quotes have been saved. Start saving books and quotes by clicking search!</p>
         </>
       );
     }
