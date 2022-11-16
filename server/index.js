@@ -104,9 +104,9 @@ app.post('/api/saveBooks', (req, res, next) => {
   const sqlGetBookId = `
     select "bookId"
     from "books"
-    where "isbn"= $1
+    where "googleId"= $1
   `;
-  const paramsGetBookId = [isbn];
+  const paramsGetBookId = [googleId];
 
   const sqlsaveBook = `
     insert into "books"("googleId", "title", "author", "description", "publishedYear", "isbn", "coverImgURL")
@@ -146,14 +146,14 @@ app.post('/api/saveBooks', (req, res, next) => {
         .query(sqlLibrary, paramsLibrary)
         .then(result => result.rows);
     })
-    // .then(result => {
-    //   if (quote !== '') {
-    //     const paramsQuote = [userId, Number(result[0].bookId), quote, quotePageNumber];
-    //     return db
-    //       .query(sqlQuote, paramsQuote)
-    //       .then(result => result.rows);
-    //   } else return result;
-    // })
+    .then(result => {
+      if (quote !== '') {
+        const paramsQuote = [userId, Number(result[0].bookId), quote, quotePageNumber];
+        return db
+          .query(sqlQuote, paramsQuote)
+          .then(result => result.rows);
+      } else return result;
+    })
     .then(result => res.status(201).json(result))
     .catch(err => next(err));
 });

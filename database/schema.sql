@@ -26,7 +26,7 @@ CREATE TABLE "public"."books" (
 	"author" TEXT,
 	"description" TEXT,
 	"publishedYear" TEXT NOT NULL,
-	"isbn" TEXT NOT NULL UNIQUE,
+	"isbn" TEXT NOT NULL,
 	"coverImgURL" TEXT NOT NULL,
 	CONSTRAINT "books_pk" PRIMARY KEY ("bookId")
 ) WITH (

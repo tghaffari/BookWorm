@@ -399,8 +399,12 @@
   font-size: 1.5rem;
   color: #783b03;
   font-weight: normal;
-  margin: 2.5rem 0 0;
+  margin: 2rem 0 0;
   display: inline-block;
+}
+
+.home-to-read-shelf-title {
+  margin-top: 0;
 }
 
 .read-shelf,
@@ -414,10 +418,8 @@
 
 .home-cover-img {
   height: 100px;
-  max-width: 65px;
   margin-top: 1.25rem;
   box-shadow: 10px 2px 5px -5px rgba(0, 0, 0, 0.5);
-  object-fit: cover;
 }
 
 .cover-li:nth-of-type(1n+4) {
@@ -791,6 +793,10 @@
     padding: 0;
   }
 
+  .library-books-list li:nth-child(even) {
+    padding-left: 2rem;
+  }
+
   .home-read-shelf-title,
   .home-to-read-shelf-title {
     font-size: 2rem;
@@ -798,8 +804,7 @@
   }
 
   .home-cover-img {
-    height: 125px;
-    max-width: 80px;
+    height: 140px;
     margin-top: 1.875rem;
   }
 
