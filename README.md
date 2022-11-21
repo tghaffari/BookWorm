@@ -32,6 +32,8 @@ Try the application live at [https://bookworm.tarraghaffari.net/]
 - User can save books to their library and decide if they want to save it to their read bookshelf or to-read bookshelf. If saved to their read bookshelf, user can enter a completed date.
 - User can view the books saved to their library.
 - User can view their recently saved books on their home screen.
+- User can save a quote from their finished books.
+- User can view all saved quotes.
 
 ## Preview
 
@@ -39,8 +41,6 @@ Try the application live at [https://bookworm.tarraghaffari.net/]
 
 ## Features in Development
 
-- User can save a quote from their finished books.
-- User can view all saved quotes.
 - User can edit their book entries.
 - User can delete books from their library.
 - User can sort their library by bookshelf (view each bookshelf separately).
