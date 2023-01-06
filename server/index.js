@@ -232,6 +232,34 @@ app.get('/api/getQuotes', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/editEntry/:id', (req, res, next) => {
+  //
+});
+
+app.delete('/api/deleteEntry/:bookId', (req, res, next) => {
+  // console.log(req.params);
+  const bookId = Number(req.params.bookId);
+  const { userId } = req.user;
+
+  if (!bookId) {
+    throw new ClientError(401, 'invalid book id');
+  }
+
+  const sql = `
+  delete from "library"
+  where "bookId" = $1
+  and "userId" = $2
+  `;
+
+  const params = [bookId, userId];
+  db.query(sql, params)
+    .then(result => {
+      const data = result.rows[0];
+      res.status(204).json(data);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
