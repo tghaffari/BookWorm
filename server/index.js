@@ -242,22 +242,52 @@ app.delete('/api/deleteEntry/:bookId', (req, res, next) => {
   const { userId } = req.user;
 
   if (!bookId) {
-    throw new ClientError(401, 'invalid book id');
+    throw new ClientError(401, 'Please include a valid bookId');
   }
 
-  const sql = `
+  const sqlLibrary = `
   delete from "library"
   where "bookId" = $1
   and "userId" = $2
   `;
 
-  const params = [bookId, userId];
-  db.query(sql, params)
+  const paramsLibrary = [bookId, userId];
+
+  const sqlQuote = `
+    delete from "quotes"
+    where "bookId"= $1
+    and "userId" = $2
+    `;
+
+  const paramsQuote = [bookId, userId];
+
+  db.query(sqlLibrary, paramsLibrary)
     .then(result => {
-      const data = result.rows[0];
-      res.status(204).json(data);
-    })
-    .catch(err => next(err));
+      return db
+        .query(sqlQuote, paramsQuote)
+        .then(result => {
+          const data = result.rows[0]; // is this line necessary? Try removing it and see what happens
+          res.status(201).json(data);
+        })
+        .catch(err => next(err));
+    });
+
+  // db.query(sqlGetBookId, paramsGetBookId)
+  //   .then(resultingBook => {
+  //     if (resultingBook.rows.length) return resultingBook.rows[0].bookId;
+  //     return db
+  //       .query(sqlsaveBook, paramsSaveBook)
+  //       .then(result => {
+  //         const [savedBook] = result.rows;
+  //         return savedBook.bookId;
+  //       });
+  //   })
+  //   .then(bookId => {
+  //     const paramsLibrary = [Number(bookId), userId, completedAt];
+  //     return db
+  //       .query(sqlLibrary, paramsLibrary)
+  //       .then(result => result.rows);
+  //   })
 });
 
 app.use(errorMiddleware);
