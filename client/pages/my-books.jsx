@@ -1,15 +1,18 @@
 import React from 'react';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
+import DeleteConfirmationModal from '../components/delete-confirmation-modal';
 
 export default class MyBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       myBooks: null,
-      showDeleteModal: false
+      showDeleteModal: false,
+      selectedBookId: null
     };
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.closeDeleteConfirmationModal = this.closeDeleteConfirmationModal.bind(this);
   }
 
   formatDate(date) {
@@ -24,7 +27,11 @@ export default class MyBooks extends React.Component {
   handleDeleteClick(event) {
     const bookEntry = event.target.closest('li');
     const bookId = parseInt(bookEntry.getAttribute('data-id'));
-    this.setState({ showDeleteModal: true });
+    this.setState({ showDeleteModal: true, selectedBookId: { bookId } });
+  }
+
+  closeDeleteConfirmationModal() {
+    this.setState({ showDeleteModal: false, selectedBookId: null });
   }
 
   componentDidMount() {
@@ -111,6 +118,7 @@ export default class MyBooks extends React.Component {
         <ul className='library-books-list'>
           {books}
         </ul>
+        {this.state.showDeleteModal && <DeleteConfirmationModal bookId={this.state.selectedBookId} closeModal={this.closeDeleteConfirmationModal}/>}
       </>
 
     );

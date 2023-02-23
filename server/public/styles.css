@@ -629,6 +629,21 @@
   font-size: 1.25rem;
 }
 
+/* Delete Modal */
+
+.delete-modal-window {
+  background-color: #f2e7e2;
+  width: 85%;
+  height: 20rem;
+}
+
+.delete-modal-exit {
+  position: relative;
+  top: 5px;
+  left: 5px;
+  font-size: 1.125rem;
+}
+
 /* Pseudo-classes */
 
 .search-icon:hover,
@@ -647,7 +662,8 @@
 .home-to-read-shelf-title,
 .auth-button:hover,
 .guest-link:hover,
-.trash-icon:hover {
+.trash-icon:hover,
+.delete-modal-exit:hover {
   cursor: pointer;
 }
 
@@ -659,7 +675,8 @@
 .cancel-search-desktop:hover,
 .book-modal-exit:hover,
 .book-icon:hover,
-.quotes-icon:hover {
+.quotes-icon:hover,
+.delete-modal-exit:hover {
   color: #783b03;
   transition: 1s;
 }
@@ -911,4 +928,5 @@
   .desktop-search-bar {
     width: 150px;
   }
+}
 }
