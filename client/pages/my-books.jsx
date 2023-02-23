@@ -9,6 +9,7 @@ export default class MyBooks extends React.Component {
       myBooks: null,
       showDeleteModal: false
     };
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
   formatDate(date) {
@@ -18,6 +19,12 @@ export default class MyBooks extends React.Component {
     const day = date.slice(8, 10);
     const reformattedDate = `${month} ${day}, ${year}`;
     return reformattedDate;
+  }
+
+  handleDeleteClick(event) {
+    const bookEntry = event.target.closest('li');
+    const bookId = parseInt(bookEntry.getAttribute('data-id'));
+    this.setState({ showDeleteModal: true });
   }
 
   componentDidMount() {
@@ -90,7 +97,7 @@ export default class MyBooks extends React.Component {
                   <p className='library-book-title'> {book.title}</p>
                   {authorAndYear}
                   {completedDate}
-                <i className="fa-solid fa-trash-can trash-icon"></i>
+                <i className="fa-solid fa-trash-can trash-icon" onClick={this.handleDeleteClick}></i>
                 </div>
             </div>
           </li>
