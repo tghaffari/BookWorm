@@ -9,7 +9,7 @@ export default class DeleteConfirmationModal extends React.Component {
 
   handleDeleteClick() {
     const token = window.localStorage.getItem('bookWorm-jwt');
-    const bookId = this.props.bookId.bookId;
+    const bookId = this.props.bookId;
 
     const init = {
       method: 'DELETE',
