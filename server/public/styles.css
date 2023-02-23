@@ -391,6 +391,11 @@
   padding: 0 1.25rem;
 }
 
+.trash-icon {
+  color: #783b03;
+  padding-top: 0.31rem;
+}
+
 /* Home Page */
 
 .home-read-shelf-title,
@@ -641,7 +646,8 @@
 .home-read-shelf-title,
 .home-to-read-shelf-title,
 .auth-button:hover,
-.guest-link:hover {
+.guest-link:hover,
+.trash-icon:hover {
   cursor: pointer;
 }
 
@@ -659,7 +665,8 @@
 }
 
 .home-read-shelf-title:hover,
-.home-to-read-shelf-title:hover {
+.home-to-read-shelf-title:hover,
+.trash-icon:hover {
   color: #f7963c;
   transition: 1s;
 }

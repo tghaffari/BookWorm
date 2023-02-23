@@ -6,7 +6,8 @@ export default class MyBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      myBooks: null
+      myBooks: null,
+      showDeleteModal: false
     };
   }
 
@@ -89,6 +90,7 @@ export default class MyBooks extends React.Component {
                   <p className='library-book-title'> {book.title}</p>
                   {authorAndYear}
                   {completedDate}
+                <i className="fa-solid fa-trash-can trash-icon"></i>
                 </div>
             </div>
           </li>

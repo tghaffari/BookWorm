@@ -271,23 +271,6 @@ app.delete('/api/deleteEntry/:bookId', (req, res, next) => {
         })
         .catch(err => next(err));
     });
-
-  // db.query(sqlGetBookId, paramsGetBookId)
-  //   .then(resultingBook => {
-  //     if (resultingBook.rows.length) return resultingBook.rows[0].bookId;
-  //     return db
-  //       .query(sqlsaveBook, paramsSaveBook)
-  //       .then(result => {
-  //         const [savedBook] = result.rows;
-  //         return savedBook.bookId;
-  //       });
-  //   })
-  //   .then(bookId => {
-  //     const paramsLibrary = [Number(bookId), userId, completedAt];
-  //     return db
-  //       .query(sqlLibrary, paramsLibrary)
-  //       .then(result => result.rows);
-  //   })
 });
 
 app.use(errorMiddleware);
