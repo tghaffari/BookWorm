@@ -634,14 +634,44 @@
 .delete-modal-window {
   background-color: #f2e7e2;
   width: 85%;
-  height: 20rem;
+  height: 15rem;
 }
 
 .delete-modal-exit {
   position: relative;
   top: 5px;
   left: 5px;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
+}
+
+.delete-modal-padding {
+  padding: 0 2rem;
+}
+
+.delete-modal-text {
+  font-family: Inter, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.7rem;
+  margin-bottom: 3rem;
+}
+
+.delete-button,
+.no-button {
+  border: none;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  color: white;
+  border-radius: 4px;
+  padding: 0.7rem 0;
+  width: 100px;
+}
+
+.delete-button {
+  background-color: #392191;
+}
+
+.no-button {
+  background-color: #f67070;
 }
 
 /* Pseudo-classes */
