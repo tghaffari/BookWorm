@@ -633,7 +633,7 @@
 
 .delete-modal-window {
   background-color: #f2e7e2;
-  width: 85%;
+  width: 20rem;
   height: 15rem;
 }
 
@@ -659,7 +659,7 @@
 .no-button {
   border: none;
   font-family: Inter, sans-serif;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: white;
   border-radius: 4px;
   padding: 0.7rem 0;
@@ -693,7 +693,9 @@
 .auth-button:hover,
 .guest-link:hover,
 .trash-icon:hover,
-.delete-modal-exit:hover {
+.delete-modal-exit:hover,
+.delete-button:hover,
+.no-button:hover {
   cursor: pointer;
 }
 
@@ -943,6 +945,32 @@
     margin: 0 0 2rem;
   }
 
+  .delete-modal-window {
+    width: 25rem;
+    height: 20rem;
+  }
+
+  .delete-modal-exit {
+    font-size: 2rem;
+  }
+
+  .delete-modal-padding {
+    padding: 0 2.5rem;
+  }
+
+  .delete-modal-text {
+    font-size: 1.6rem;
+    line-height: 2.5rem;
+    margin: 1rem 0 4rem;
+  }
+
+  .delete-button,
+  .no-button {
+    font-size: 1rem;
+    padding: 1rem 0;
+    width: 120px;
+  }
+
   @keyframes grow-and-shrink {
     50% {
       transform: scale(2);
@@ -958,5 +986,4 @@
   .desktop-search-bar {
     width: 150px;
   }
-}
 }
