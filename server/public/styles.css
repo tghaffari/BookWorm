@@ -391,6 +391,11 @@
   padding: 0 1.25rem;
 }
 
+.trash-icon {
+  color: #783b03;
+  padding-top: 0.31rem;
+}
+
 /* Home Page */
 
 .home-read-shelf-title,
@@ -624,6 +629,51 @@
   font-size: 1.25rem;
 }
 
+/* Delete Modal */
+
+.delete-modal-window {
+  background-color: #f2e7e2;
+  width: 20rem;
+  height: 15rem;
+}
+
+.delete-modal-exit {
+  position: relative;
+  top: 5px;
+  left: 5px;
+  font-size: 1.5rem;
+}
+
+.delete-modal-padding {
+  padding: 0 2rem;
+}
+
+.delete-modal-text {
+  font-family: Inter, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.7rem;
+  margin-bottom: 3rem;
+}
+
+.delete-button,
+.no-button {
+  border: none;
+  font-family: Inter, sans-serif;
+  font-size: 0.875rem;
+  color: white;
+  border-radius: 4px;
+  padding: 0.7rem 0;
+  width: 100px;
+}
+
+.delete-button {
+  background-color: #392191;
+}
+
+.no-button {
+  background-color: #f67070;
+}
+
 /* Pseudo-classes */
 
 .search-icon:hover,
@@ -641,7 +691,11 @@
 .home-read-shelf-title,
 .home-to-read-shelf-title,
 .auth-button:hover,
-.guest-link:hover {
+.guest-link:hover,
+.trash-icon:hover,
+.delete-modal-exit:hover,
+.delete-button:hover,
+.no-button:hover {
   cursor: pointer;
 }
 
@@ -653,13 +707,15 @@
 .cancel-search-desktop:hover,
 .book-modal-exit:hover,
 .book-icon:hover,
-.quotes-icon:hover {
+.quotes-icon:hover,
+.delete-modal-exit:hover {
   color: #783b03;
   transition: 1s;
 }
 
 .home-read-shelf-title:hover,
-.home-to-read-shelf-title:hover {
+.home-to-read-shelf-title:hover,
+.trash-icon:hover {
   color: #f7963c;
   transition: 1s;
 }
@@ -887,6 +943,32 @@
   .quote-details {
     font-size: 1rem;
     margin: 0 0 2rem;
+  }
+
+  .delete-modal-window {
+    width: 25rem;
+    height: 20rem;
+  }
+
+  .delete-modal-exit {
+    font-size: 2rem;
+  }
+
+  .delete-modal-padding {
+    padding: 0 2.5rem;
+  }
+
+  .delete-modal-text {
+    font-size: 1.6rem;
+    line-height: 2.5rem;
+    margin: 1rem 0 4rem;
+  }
+
+  .delete-button,
+  .no-button {
+    font-size: 1rem;
+    padding: 1rem 0;
+    width: 120px;
   }
 
   @keyframes grow-and-shrink {

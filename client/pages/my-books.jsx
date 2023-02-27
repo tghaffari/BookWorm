@@ -1,13 +1,19 @@
 import React from 'react';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
+import DeleteConfirmationModal from '../components/delete-confirmation-modal';
 
 export default class MyBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      myBooks: null
+      myBooks: null,
+      showDeleteModal: false,
+      selectedBookId: null
     };
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.closeDeleteConfirmationModal = this.closeDeleteConfirmationModal.bind(this);
+    this.getBooks = this.getBooks.bind(this);
   }
 
   formatDate(date) {
@@ -19,7 +25,17 @@ export default class MyBooks extends React.Component {
     return reformattedDate;
   }
 
-  componentDidMount() {
+  handleDeleteClick(event) {
+    const bookEntry = event.target.closest('li');
+    const bookId = parseInt(bookEntry.getAttribute('data-id'));
+    this.setState({ showDeleteModal: true, selectedBookId: bookId });
+  }
+
+  closeDeleteConfirmationModal() {
+    this.setState({ showDeleteModal: false, selectedBookId: null });
+  }
+
+  getBooks() {
     const token = window.localStorage.getItem('bookWorm-jwt');
     const init = {
       method: 'GET',
@@ -38,6 +54,14 @@ export default class MyBooks extends React.Component {
       });
   }
 
+  componentDidMount() {
+    this.getBooks();
+  }
+
+  componentDidUpdate() {
+    this.getBooks();
+  }
+
   render() {
     if (!this.context.user) return <Redirect to="sign-in" />;
 
@@ -46,7 +70,7 @@ export default class MyBooks extends React.Component {
     if (this.state.myBooks.length === 0) {
       return (
         <>
-        <h1 className='my-books-heading'>My Books</h1>
+          <h1 className='my-books-heading'>My Books</h1>
           <p className='no-books-text'>No books have been saved. Click search to start your next reading adventure!</p>
         </>
       );
@@ -80,7 +104,7 @@ export default class MyBooks extends React.Component {
 
       return (
         <>
-          <li className='column-one-half column-full my-books-list-items' key={book.googleId} data-id={book.bookId} >
+          <li key={book.bookId} className='column-one-half column-full my-books-list-items' data-id={book.bookId} >
               <div className='row jusitfy-content-center'>
                 <div className='column-flex'>
                   <img className='library-cover-img' src={book.coverImgURL} />
@@ -89,6 +113,7 @@ export default class MyBooks extends React.Component {
                   <p className='library-book-title'> {book.title}</p>
                   {authorAndYear}
                   {completedDate}
+                <i className="fa-solid fa-trash-can trash-icon" onClick={this.handleDeleteClick}></i>
                 </div>
             </div>
           </li>
@@ -102,8 +127,8 @@ export default class MyBooks extends React.Component {
         <ul className='library-books-list'>
           {books}
         </ul>
+        {this.state.showDeleteModal && <DeleteConfirmationModal bookId={this.state.selectedBookId} closeModal={this.closeDeleteConfirmationModal}/>}
       </>
-
     );
   }
 }

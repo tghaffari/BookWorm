@@ -232,6 +232,46 @@ app.get('/api/getQuotes', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/editEntry/:id', (req, res, next) => {
+  //
+});
+
+app.delete('/api/deleteEntry/:bookId', (req, res, next) => {
+  // console.log(req.params);
+  const bookId = Number(req.params.bookId);
+  const { userId } = req.user;
+
+  if (!bookId) {
+    throw new ClientError(401, 'Please include a valid bookId');
+  }
+
+  const sqlLibrary = `
+  delete from "library"
+  where "bookId" = $1
+  and "userId" = $2
+  `;
+
+  const paramsLibrary = [bookId, userId];
+
+  const sqlQuote = `
+    delete from "quotes"
+    where "bookId"= $1
+    and "userId" = $2
+    `;
+
+  const paramsQuote = [bookId, userId];
+
+  db.query(sqlLibrary, paramsLibrary)
+    .then(result => {
+      return db
+        .query(sqlQuote, paramsQuote)
+        .then(result => {
+          res.status(201);
+        })
+        .catch(err => next(err));
+    });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
