@@ -266,8 +266,7 @@ app.delete('/api/deleteEntry/:bookId', (req, res, next) => {
       return db
         .query(sqlQuote, paramsQuote)
         .then(result => {
-          const data = result.rows[0]; // is this line necessary? Try removing it and see what happens
-          res.status(201).json(data);
+          res.status(201);
         })
         .catch(err => next(err));
     });
