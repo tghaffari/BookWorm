@@ -34,6 +34,7 @@ Try the application live at [https://bookworm.tarraghaffari.net/]
 - User can view their recently saved books on their home screen.
 - User can save a quote from their finished books.
 - User can view all saved quotes.
+- User can delete books from their library.
 
 ## Preview
 
@@ -42,7 +43,6 @@ Try the application live at [https://bookworm.tarraghaffari.net/]
 ## Features in Development
 
 - User can edit their book entries.
-- User can delete books from their library.
 - User can sort their library by bookshelf (view each bookshelf separately).
 - User can choose search parameters (title, author, subject, etc.)
 
